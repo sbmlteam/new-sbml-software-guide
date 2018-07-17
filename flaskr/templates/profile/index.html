@@ -6,7 +6,7 @@
 
 {% block content %}
     <form method="post">
-        <a href="{{ url_for('auth.change') }}">Change Password</a>
+        <a href="{{ url_for('auth.recover') }}">Change Password</a>
     </form>
     <hr>
     <form action="{{ url_for('auth.delete') }}" method="post">

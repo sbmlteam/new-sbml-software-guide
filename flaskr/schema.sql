@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS post;
+DROP TABLE IF EXISTS recovery;
 
 CREATE TABLE user (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -14,4 +15,9 @@ CREATE TABLE post (
     title TEXT NOT NULL,
     body TEXT NOT NULL,
     FOREIGN KEY (author_id) REFERENCES user (id)
+);
+
+CREATE TABLE recovery (
+    email TEXT UNIQUE NOT NULL,
+    code TEXT NOT NULL
 );

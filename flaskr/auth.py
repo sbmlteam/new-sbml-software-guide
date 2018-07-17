@@ -1,4 +1,6 @@
 import functools
+import string
+import random
 
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
@@ -47,32 +49,61 @@ def register():
 def profile():
     return render_template('profile/index.html')
 
-@bp.route('/change', methods=('GET', 'POST'))
-def change():
-    pass
-
 @bp.route('/recover', methods=('GET', 'POST'))
 def recover():
     if request.method == 'POST':
         username = request.form['username']
-        
         db = get_db()
         error = None
         
         if db.execute(
-            'SELECT id FROM user WHERE username = ?' (username,)
+            'SELECT id FROM user WHERE username = ?', (username,)
         ).fetchone() is None:
-            error = 'Could not find user {}.'.format(username)
+            error = 'No user associated with {}.'.format(username)
         
         if error is None:
-            return redirect(url_for('auth.recover.success'))
+            code = generate_code()
+            db.execute('DELETE FROM recovery WHERE email = ?', (username, ))
+            db.execute('INSERT INTO recovery (email, code) VALUES(?, ?)', (username, generate_password_hash(code)))
+            print (code)
+
+            # TODO: Send email
+
+            db.commit()
+            return redirect(url_for('auth.recover_sent', email=username))
             
         flash(error)
         
     return render_template('auth/recover.html')
+
+@bp.route('/recover/sent', methods=('GET', 'POST'))
+def recover_sent():
+    email = request.args['email']
+    if request.method == 'POST':
+        code = request.form['code']
+        passworda = request.form['passworda']
+        passwordb = request.form['passwordb']
+        db = get_db()
+        error = None
+
+        correct_code = db.execute(
+                'SELECT code FROM recovery WHERE email = ?', (email,)
+                ).fetchone()['code']
+        if not check_password_hash(correct_code, code):
+            error = 'Incorrect code.'
+        elif passworda is not passwordb:
+            error = 'The passwords must match.'
+
+        if error is not None:
+            flash(error)
+        else:
+            db.execute('UPDATE user SET password = ? WHERE username = ?', (generate_password_hash(passworda), email))
+            db.commit()
+            return redirect(url_for('auth.login'))
+    return render_template('auth/recover_sent.html', email=email)
     
 @bp.route('/recover/success', methods=('GET', 'POST'))
-def succes():
+def success():
     # sent email
     pass
         
@@ -135,3 +166,6 @@ def login_required(view):
         return view(**kwargs)
     
     return wrapped_view
+
+def generate_code(size=8, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.SystemRandom().choice(chars) for _ in range(size))
