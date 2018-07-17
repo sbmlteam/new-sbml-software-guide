@@ -43,6 +43,39 @@ def register():
         
     return render_template('auth/register.html')
     
+@bp.route('/profile', methods=('GET', 'POST'))
+def profile():
+    return render_template('profile/index.html')
+
+@bp.route('/change', methods=('GET', 'POST'))
+def change():
+    pass
+
+@bp.route('/recover', methods=('GET', 'POST'))
+def recover():
+    if request.method == 'POST':
+        username = request.form['username']
+        
+        db = get_db()
+        error = None
+        
+        if db.execute(
+            'SELECT id FROM user WHERE username = ?' (username,)
+        ).fetchone() is None:
+            error = 'Could not find user {}.'.format(username)
+        
+        if error is None:
+            return redirect(url_for('auth.recover.success'))
+            
+        flash(error)
+        
+    return render_template('auth/recover.html')
+    
+@bp.route('/recover/success', methods=('GET', 'POST'))
+def succes():
+    # sent email
+    pass
+        
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
     if request.method == 'POST':
@@ -83,7 +116,16 @@ def load_logged_in_user():
 def logout():
     session.clear()
     return redirect(url_for('index'))
-    
+
+@bp.route('/delete', methods=('GET', 'POST'))
+def delete():
+    user_id = session.get('user_id')
+    db = get_db()
+    db.execute('DELETE FROM post WHERE author_id = ?', (user_id,))
+    db.execute('DELETE FROM user WHERE id = ?', (user_id,))
+    db.commit()
+    return redirect(url_for('entry.index'))
+
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
