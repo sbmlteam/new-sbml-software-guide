@@ -10,7 +10,8 @@
         <input name="username" id="username" required>
         <label for "password">Password</label>
         <input type="password" name="password" id="password" required>
-        <!-- TODO: ADD RECOVER PASSWORD OPTION -->
         <input type="submit" value="Log In">
     </form>
+    <hr>
+    <a href="{{ url_for("auth.recover") }}">Forgot Password</a>
 {% endblock %}

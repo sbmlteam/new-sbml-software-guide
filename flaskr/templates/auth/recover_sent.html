@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}Change Password{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <div>Please check {{email}} for your recovery code!</div>
+    <form method="post">
+        <label for="code">Recovery Code</label>
+        <input name="code" id="code" required>
+        <label for="passworda">New Password</label>
+        <input type="password" name="passworda" id="passworda" required>
+        <label for="passwordb">Confirm New Password</label>
+        <input type="password" name="passwordb" id="passwordb" required>
+        <input type="submit" value="Change Password">
+    </form>
+{% endblock %}
