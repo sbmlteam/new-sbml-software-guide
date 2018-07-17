@@ -25,8 +25,9 @@ wheels/
 *.egg
 MANIFEST
 
-# Lock files
+# Vim files
 *.swp
+*.vim
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
