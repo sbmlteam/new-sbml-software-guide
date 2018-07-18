@@ -4,6 +4,8 @@ import os
 
 from flask import Flask
 
+python_called = False
+
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
@@ -30,20 +32,28 @@ def create_app(test_config=None):
     def hello():
         return 'Hello, World!'
         
-    import db
+    if python_called:
+        import db
+        import auth
+        import entry
+        import profile
+    else:
+        from . import db
+        from . import auth
+        from . import entry
+        from . import profile
+    
     db.init_app(app)
     
-    import auth
     app.register_blueprint(auth.bp)
-    
-    import entry
     app.register_blueprint(entry.bp)
+    app.register_blueprint(profile.bp)
     app.add_url_rule('/', endpoint='index')
         
     return app
 
 if __name__ == "__main__":
-    # print "(a)"
+    python_called = True
     app = create_app()
     print ("starting")
     app.run(threaded = True)

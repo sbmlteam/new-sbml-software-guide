@@ -1,15 +1,23 @@
 {% extends 'base.html' %}
 
 {% block header %}
-    <h1>{% block title%}Profile{% endblock %}</h1>
+    <h1>{% block title %}Profile{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-    <form method="post">
-        <a href="{{ url_for('auth.recover') }}">Change Password</a>
-    </form>
+    <p>
+        User <strong>{{email}}</strong>
+        <a style="float:right;" href="{{ url_for('profile.settings') }}">Settings</a>
+    </p>
     <hr>
-    <form action="{{ url_for('auth.delete') }}" method="post">
-        <input class="danger" type="submit" value="Delete Account" onclick="return confirm('Are you sure you want to delete your account? Your entries will be deleted also!');">
+    <form method="post">
+        <p><strong>Entries</strong></p>
+        <table>
+            {% for entry in entries %}
+            <tr>
+                <a href="{{ url_for('entry.update', id=entry['id']) }}">{{ entry['title']}}</a>
+            </tr>
+            {% endfor %}
+        </table>
     </form>
 {% endblock %}

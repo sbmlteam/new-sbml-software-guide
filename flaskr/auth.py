@@ -45,10 +45,6 @@ def register():
         
     return render_template('auth/register.html')
     
-@bp.route('/profile', methods=('GET', 'POST'))
-def profile():
-    return render_template('profile/index.html')
-
 @bp.route('/recover', methods=('GET', 'POST'))
 def recover():
     if request.method == 'POST':
