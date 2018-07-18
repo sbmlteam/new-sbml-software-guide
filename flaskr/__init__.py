@@ -1,12 +1,12 @@
 # Taken from http://flask.pocoo.org/docs/1.0/tutorial/factory/
 
 import os
+import sys
+from argparse import ArgumentParser
 
 from flask import Flask
 
-python_called = False
-
-def create_app(test_config=None):
+def create_app(test_config=None, init=False, python_called=False):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
@@ -44,7 +44,11 @@ def create_app(test_config=None):
         from . import profile
     
     db.init_app(app)
-    
+
+    if init:
+        with app.app_context():
+            db.init_db()
+
     app.register_blueprint(auth.bp)
     app.register_blueprint(entry.bp)
     app.register_blueprint(profile.bp)
@@ -54,6 +58,11 @@ def create_app(test_config=None):
 
 if __name__ == "__main__":
     python_called = True
-    app = create_app()
-    print ("starting")
+
+    parser = ArgumentParser(description = "SBML software guide web interface")
+    parser.add_argument("-i", "--init",
+            help="Re-initializes the database, clearing the existing one", action="store_true")
+    args = parser.parse_args()
+
+    app = create_app(init=args.init, python_called=python_called)
     app.run(threaded = True)

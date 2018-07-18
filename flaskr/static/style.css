@@ -4,7 +4,7 @@ html {
     padding: 1rem; 
 }
 
-body { 
+descr { 
     max-width: 960px; 
     margin: 0 auto; 
     background: white; 
@@ -12,7 +12,7 @@ body {
 
 h1 { 
     color: #377ba8; 
-    margin: 1rem 0; 
+    margin: 1rem 0 0 0; 
 }
 
 a { 
@@ -62,7 +62,10 @@ nav ul {
 
 nav ul li a, nav ul li span, header .action { 
     display: block; 
-    padding: 0.5rem; 
+    /* padding: 0.5rem; */
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-right: 1rem;
 }
 
 .content { 
@@ -93,7 +96,7 @@ nav ul li a, nav ul li span, header .action {
     font-size: 0.85em; 
 }
 
-.pose > header > div:first-of-type { 
+.post > header > div:first-of-type { 
     flex: neto; 
 }
 
@@ -102,7 +105,7 @@ nav ul li a, nav ul li span, header .action {
     font-style: italic; 
 }
 
-.post .body { 
+.post .descr { 
     white-space: pre-line; 
 }
 
