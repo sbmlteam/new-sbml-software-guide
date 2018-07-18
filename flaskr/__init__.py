@@ -4,7 +4,6 @@ import os
 
 from flask import Flask
 
-
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
@@ -31,14 +30,20 @@ def create_app(test_config=None):
     def hello():
         return 'Hello, World!'
         
-    from . import db
+    import db
     db.init_app(app)
     
-    from . import auth
+    import auth
     app.register_blueprint(auth.bp)
     
-    from . import entry
+    import entry
     app.register_blueprint(entry.bp)
     app.add_url_rule('/', endpoint='index')
         
     return app
+
+if __name__ == "__main__":
+    # print "(a)"
+    app = create_app()
+    print ("starting")
+    app.run(threaded = True)
