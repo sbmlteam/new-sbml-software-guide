@@ -11,12 +11,41 @@
 {% endblock %}
 
 {% block content %}
+
+    <!-- FORM INPUT -->
+
     <form method="post">
+
         <label for="name">Name</label>
+        <h5>example description</h5>
         <input name="name" id="name" value="{{ request.form['name'] or entry['name'] }}" required>
         <label for="descr">Description</label>
         <textarea name="descr" id="descr">{{ request.form['descr'] or entry['descr'] }}</textarea>
+
+        <label for="fee">Is there a fee for using the software?</label>
+        <table>
+            <tr class="head">
+                <th></th>
+                <th>Free</th>
+                <th>For a fee</th>
+            </tr>
+            <tr>
+                <td>Academic</td>
+
+                <td class="box"><label class="container">
+                    <input name="fee" id="free_academic" type="checkbox">
+                    <span class="checkmark"></span>
+                </label></td>
+
+                <td class="box"><label class="container">
+                    <input name="fee" id="fee_academic" type="radio">
+                    <span class="checkmark button"></span>
+                </label></td>
+            </tr>
+        </table>
+
         <input type="submit" value="Save">
+
     </form>
     {% if edit %}
         <hr>

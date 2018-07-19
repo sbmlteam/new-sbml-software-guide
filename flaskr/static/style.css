@@ -1,3 +1,5 @@
+/* General formatting */
+
 html { 
     font-family: sans-serif; 
     background: #eee; 
@@ -36,6 +38,111 @@ hr {
     border-top: 1px solid lightgray; 
 }
 
+/* Table inputs */
+
+table {
+    padding-top: 0.15em;
+}
+
+th, td {
+    border-bottom: 1px solid #2a5f82;
+}
+
+th {
+    font-weight: normal;
+    font-size: 15px;
+    padding: 0.5rem;
+}
+
+.box {
+    text-align:center;
+}
+
+td {
+    vertical-align:middle;
+    font-size:14px;
+    padding: 0.5rem 0.5rem 0.25rem 0.5rem;
+}
+
+td:first-child, th:first-child{
+    border-right: 2px solid #2a5f82;
+}
+
+/* Buttons and checkboxes */
+
+.container {
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    font-size: 15px;
+    padding-right:25px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    overflow: auto;
+}
+
+.container input {
+    position:absolute;
+    opacity:0;
+    cursor:pointer;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 17px;
+    width: 17px;
+    background-color: #ccc;
+}
+
+.button {
+    border-radius: 50%;
+}
+
+.container:hover input ~ .checkmark {
+    background-color: #888;
+}
+
+.container input:checked ~ .checkmark {
+    background-color: #377ba8;
+}
+
+.checkmark:after {
+    content:"";
+    display:none;
+    position:absolute;
+}
+
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.container .checkmark:not(.button):after {
+    border: solid white;
+    left: 5px;
+    top: 3px;
+    width: 4px;
+    height: 7px;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.container .button:after {
+    top:4px;
+    left:4px;
+    width:9px;
+    height:9px;
+    border-radius: 50%;
+    background:white;
+}
+
+/* Navigation bar */
+
 nav { 
     background: lightgray; 
     display: flex; 
@@ -67,6 +174,8 @@ nav ul li a, nav ul li span, header .action {
     padding-bottom: 0.5rem;
     padding-right: 1rem;
 }
+
+/* Front page display */
 
 .content { 
     padding: 0 1rem 1rem; 
@@ -120,18 +229,27 @@ nav ul li a, nav ul li span, header .action {
 }
 
 .content label { 
-    font-weight: bold; 
+    margin-top: 1em;
+    font-size: 20px;
     margin-bottom: 0.5em; 
 }
 
+.content h5 {
+    font-weight: normal;
+    margin: 0 0 0.5rem 0;
+}
+
 .content input, .content textarea { 
-    margin-bottom: 1em; 
+    margin-bottom: 0.5em; 
+    margin-top: 0.5em;
 }
 
 .content textarea { 
     min-height: 12em; 
     resize: vertical; 
 }
+
+/* General button formatting */
 
 input.danger { 
     color: #cc2f2e; 
