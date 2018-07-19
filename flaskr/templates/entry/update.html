@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 
 {% block header %}
-    <h1>{% block title %}Edit "{{ entry['name'] }}"{% endblock %}</h1>
+    <h1>{% block title %}
+        {% if edit %}
+            Edit "{{ entry['name'] }}"
+        {% else %}
+            New Entry
+        {% endif %}
+    {% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
@@ -12,8 +18,10 @@
         <textarea name="descr" id="descr">{{ request.form['descr'] or entry['descr'] }}</textarea>
         <input type="submit" value="Save">
     </form>
-    <hr>
-    <form action="{{ url_for('entry.delete', id=entry['id']) }}" method="post">
-        <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this entry?');">
-    </form>
+    {% if edit %}
+        <hr>
+        <form action="{{ url_for('entry.delete', id=entry['id']) }}" method="post">
+            <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this entry?');">
+        </form>
+    {% endif %}
 {% endblock %}

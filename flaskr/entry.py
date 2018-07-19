@@ -41,7 +41,7 @@ def create():
             db.commit()
             return redirect(url_for('entry.index'))
             
-    return render_template('entry/create.html')
+    return render_template('entry/update.html', entry=None, edit=False)
 
 def get_post(id, check_author=True):
     post = get_db().execute(
@@ -84,7 +84,7 @@ def update(id):
             db.commit()
             return redirect(url_for('entry.index'))
     
-    return render_template('entry/update.html', entry=post)
+    return render_template('entry/update.html', entry=post, edit=True)
     
 @bp.route('/<int:id>/delete', methods=('POST',))
 @login_required
