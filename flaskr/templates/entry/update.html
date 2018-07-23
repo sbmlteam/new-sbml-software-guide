@@ -22,6 +22,22 @@
         <label for="descr">Description</label>
         <textarea name="descr" id="descr">{{ request.form['descr'] or entry['descr'] }}</textarea>
 
+        <label for="contact">Email contact address for this software</label>
+        <h5>What is the best email address for people to use to contact the maintainer(s) of this software? If you wish to provide more than one email address, please separate individual addresses with commas. Note: your username will NOT be put in the SBML Software Guide unless you indicate so here, either by checking the first checkbox below or including your email address in a list of multiple addresss in the "Other" field.</h5>
+        <label class="container">
+            <input name="contact" id="contact" type="radio">
+            <span class="checkmark button"></span>
+            <h6>Use my username</h6>
+        </label>
+        <span style="white-space:nowrap;">
+        <label class="container">
+            <input name="contact" id="contact_other" type="radio">
+            <span class="checkmark button"></span>
+            <h6 class="other_label">Other</h6>
+        </label>
+        <input id="contact_other_txt">
+        </span>
+
         <label for="fee">Is there a fee for using the software?</label>
         <table>
             <tr class="head">
@@ -38,8 +54,47 @@
                 </label></td>
 
                 <td class="box"><label class="container">
-                    <input name="fee" id="fee_academic" type="radio">
-                    <span class="checkmark button"></span>
+                    <input name="fee" id="fee_academic" type="checkbox">
+                    <span class="checkmark"></span>
+                </label></td>
+            </tr>
+            <tr>
+                <td>Non-Profit</td>
+
+                <td class="box"><label class="container">
+                    <input id="free_nonprofit" type="checkbox">
+                    <span class="checkmark"></span>
+                </label></td>
+
+                <td class="box"><label class="container">
+                    <input id="fee_nonprofit" type="checkbox">
+                    <span class="checkmark"></span>
+                </label></td>
+            </tr>
+            <tr>
+                <td>Government</td>
+
+                <td class="box"><label class="container">
+                    <input id="free_govt" type="checkbox">
+                    <span class="checkmark"></span>
+                </label></td>
+
+                <td class="box"><label class="container">
+                    <input id="fee_govt" type="checkbox">
+                    <span class="checkmark"></span>
+                </label></td>
+            </tr>
+            <tr>
+                <td>Commercial</td>
+
+                <td class="box"><label class="container">
+                    <input id="free_commercial" type="checkbox">
+                    <span class="checkmark"></span>
+                </label></td>
+
+                <td class="box"><label class="container">
+                    <input id="fee_commercial" type="checkbox">
+                    <span class="checkmark"></span>
                 </label></td>
             </tr>
         </table>

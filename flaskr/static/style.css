@@ -44,9 +44,11 @@ table {
     padding-top: 0.15em;
 }
 
+/*
 th, td {
     border-bottom: 1px solid #2a5f82;
 }
+*/
 
 th {
     font-weight: normal;
@@ -68,6 +70,10 @@ td:first-child, th:first-child{
     border-right: 2px solid #2a5f82;
 }
 
+table tr:nth-child(odd) td{
+    background-color:#c3d7e4;
+}
+
 /* Buttons and checkboxes */
 
 .container {
@@ -84,6 +90,7 @@ td:first-child, th:first-child{
 }
 
 .container input {
+    overflow: auto;
     position:absolute;
     opacity:0;
     cursor:pointer;
@@ -139,6 +146,7 @@ td:first-child, th:first-child{
     height:9px;
     border-radius: 50%;
     background:white;
+    overflow: auto;
 }
 
 /* Navigation bar */
@@ -232,6 +240,7 @@ nav ul li a, nav ul li span, header .action {
     margin-top: 1em;
     font-size: 20px;
     margin-bottom: 0.5em; 
+    overflow: auto;
 }
 
 .content h5 {
@@ -239,7 +248,21 @@ nav ul li a, nav ul li span, header .action {
     margin: 0 0 0.5rem 0;
 }
 
-.content input, .content textarea { 
+.content h6 {
+    font-size: 15px;
+    overflow: auto;
+    font-weight: normal;
+    margin: 0 0 0 0;
+    text-align:left;
+    padding-left:70px;
+}
+
+h6.other_label {
+    padding-right: 40px;
+    display: inline;
+}
+
+.content input:not([type='checkbox']):not([type='radio']), .content textarea { 
     margin-bottom: 0.5em; 
     margin-top: 0.5em;
 }
