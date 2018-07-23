@@ -1,284 +1,308 @@
 /* General formatting */
 
 html { 
-    font-family: sans-serif; 
-    background: #eee; 
-    padding: 1rem; 
+	font-family: sans-serif; 
+	background: #eee; 
+	padding: 1rem; 
 }
 
 descr { 
-    max-width: 960px; 
-    margin: 0 auto; 
-    background: white; 
+	max-width: 960px; 
+	margin: 0 auto; 
+	background: white; 
 }
 
 h1 { 
-    color: #377ba8; 
-    margin: 1rem 0 0 0; 
+	color: #377ba8; 
+	margin: 1rem 0 0 0; 
 }
 
 a { 
-    color: #377ba8; 
+	color: #377ba8; 
 }
 
 p {
-    color: #377ba8; 
+	color: #377ba8; 
 }
 
 .right {
-    float:right;
+	float:right;
 }
 
 .left {
-    float:left;
+	float:left;
 }
 
 hr { 
-    border: none; 
-    border-top: 1px solid lightgray; 
+	border: none; 
+	border-top: 1px solid lightgray; 
 }
 
 /* Table inputs */
 
 table {
-    padding-top: 0.15em;
+	padding-top: 0.15em;
 }
 
 /*
 th, td {
-    border-bottom: 1px solid #2a5f82;
+	border-bottom: 1px solid #2a5f82;
 }
 */
 
 th {
-    font-weight: normal;
-    font-size: 15px;
-    padding: 0.5rem;
+	font-weight: normal;
+	font-size: 15px;
+	padding: 0.5rem;
+	border-bottom: 2px solid #2a5f82;
 }
 
 .box {
-    text-align:center;
+	text-align:center;
 }
 
 td {
-    vertical-align:middle;
-    font-size:14px;
-    padding: 0.5rem 0.5rem 0.25rem 0.5rem;
+	vertical-align:middle;
+	font-size:14px;
+	padding: 0.5rem 0.5rem 0.25rem 0.5rem;
+	border: 0;
 }
 
-td:first-child, th:first-child{
-    border-right: 2px solid #2a5f82;
+table:not(.simple) td:first-child, th:first-child{
+	border-right: 2px solid #2a5f82;
+}
+
+table.simple td:first-child {
+	width:20px;
 }
 
 table tr:nth-child(odd) td{
-    background-color:#c3d7e4;
+	background-color:#c3d7e4;
 }
 
 /* Buttons and checkboxes */
 
 .container {
-    position: relative;
-    text-align: center;
-    cursor: pointer;
-    font-size: 15px;
-    padding-right:25px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    overflow: auto;
+	position: relative;
+	text-align: center;
+	cursor: pointer;
+	font-size: 15px;
+	padding-right:25px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	margin-left: 5px;
+	overflow: auto;
 }
 
 .container input {
-    overflow: auto;
-    position:absolute;
-    opacity:0;
-    cursor:pointer;
+	overflow: auto;
+	position:absolute;
+	opacity:0;
+	cursor:pointer;
 }
 
 .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 17px;
-    width: 17px;
-    background-color: #ccc;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 17px;
+	width: 17px;
+	background-color: #aaa;
 }
 
 .button {
-    border-radius: 50%;
+	border-radius: 50%;
 }
 
 .container:hover input ~ .checkmark {
-    background-color: #888;
+	background-color: #777;
 }
 
 .container input:checked ~ .checkmark {
-    background-color: #377ba8;
+	background-color: #377ba8;
 }
 
 .checkmark:after {
-    content:"";
-    display:none;
-    position:absolute;
+	content:"";
+	display:none;
+	position:absolute;
 }
 
 .container input:checked ~ .checkmark:after {
-    display: block;
+	display: block;
 }
 
 .container .checkmark:not(.button):after {
-    border: solid white;
-    left: 5px;
-    top: 3px;
-    width: 4px;
-    height: 7px;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+	border: solid white;
+	left: 5px;
+	top: 3px;
+	width: 4px;
+	height: 7px;
+	border-width: 0 3px 3px 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
 }
 
 .container .button:after {
-    top:4px;
-    left:4px;
-    width:9px;
-    height:9px;
-    border-radius: 50%;
-    background:white;
-    overflow: auto;
+	top:4px;
+	left:4px;
+	width:9px;
+	height:9px;
+	border-radius: 50%;
+	background:white;
+	overflow: auto;
 }
 
 /* Navigation bar */
 
 nav { 
-    background: lightgray; 
-    display: flex; 
-    align-items: center; 
-    padding: 0 0.5rem; 
+	background: lightgray; 
+	display: flex; 
+	align-items: center; 
+	padding: 0 0.5rem; 
 }
 
 nav h1 { 
-    flex: auto; 
-    margin: 0; 
+	flex: auto; 
+	margin: 0; 
 }
 
 nav h1 a { 
-    text-decoration: none; 
-    padding: 0.25rem 0.5rem; 
+	text-decoration: none; 
+	padding: 0.25rem 0.5rem; 
 }
 
 nav ul { 
-    display: flex; 
-    list-style: none; 
-    margin: 0; 
-    padding: 0; 
+	display: flex; 
+	list-style: none; 
+	margin: 0; 
+	padding: 0; 
 }
 
 nav ul li a, nav ul li span, header .action { 
-    display: block; 
-    /* padding: 0.5rem; */
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-right: 1rem;
+	display: block; 
+	/* padding: 0.5rem; */
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	padding-right: 1rem;
 }
 
 /* Front page display */
 
 .content { 
-    padding: 0 1rem 1rem; 
+	padding: 0 1rem 1rem; 
 }
 
 .content > header { 
-    border-bottom: 1px solid lightgray; 
-    display: flex; 
-    align-items: flex-end; 
+	border-bottom: 1px solid lightgray; 
+	display: flex; 
+	align-items: flex-end; 
 }
 
 .content > header h1 { 
-    flex: auto; 
-    margin: 1rem 0 0.25rem 0; 
+	flex: auto; 
+	margin: 1rem 0 0.25rem 0; 
 }
 
 .flash { 
-    margin: 1em 0; 
-    padding: 1em; 
-    background: #cae6f6; 
-    border: 1px solid #377ba8; 
+	margin: 1em 0; 
+	padding: 1em; 
+	background: #cae6f6; 
+	border: 1px solid #377ba8; 
 }
 
 .post > header { 
-    display: flex; 
-    align-items: flex-end; 
-    font-size: 0.85em; 
+	display: flex; 
+	align-items: flex-end; 
+	font-size: 0.85em; 
 }
 
 .post > header > div:first-of-type { 
-    flex: neto; 
+	flex: neto; 
 }
 
 .post .about { 
-    color: slategray; 
-    font-style: italic; 
+	color: slategray; 
+	font-style: italic; 
 }
 
 .post .descr { 
-    white-space: pre-line; 
+	white-space: pre-line; 
 }
 
 .content:last-child { 
-    margin-bottom: 0; 
+	margin-bottom: 0; 
 }
 
 .content form { 
-    margin: 1em 0; 
-    display: flex; 
-    flex-direction: column; 
+	margin: 1em 0; 
+	display: flex; 
+	flex-direction: column; 
 }
 
 .content label { 
-    margin-top: 1em;
-    font-size: 20px;
-    margin-bottom: 0.5em; 
-    overflow: auto;
+	margin-top: 1em;
+	font-size: 20px;
+	margin-bottom: 0.5em; 
+	overflow: auto;
 }
 
 .content h5 {
-    font-weight: normal;
-    margin: 0 0 0.5rem 0;
+	font-weight: normal;
+	margin: 0 0 0.5rem 0;
 }
 
 .content h6 {
-    font-size: 15px;
-    overflow: auto;
-    font-weight: normal;
-    margin: 0 0 0 0;
-    text-align:left;
-    padding-left:70px;
+	font-size: 15px;
+	overflow: auto;
+	font-weight: normal;
+	margin: 0 0 0 0;
+	text-align:left;
+	padding-left:70px;
 }
 
 h6.other_label {
-    padding-right: 40px;
-    display: inline;
+	padding-right: 40px;
+	display: inline;
 }
 
 .content input:not([type='checkbox']):not([type='radio']), .content textarea { 
-    margin-bottom: 0.5em; 
-    margin-top: 0.5em;
+	margin-bottom: 0.5em; 
+	margin-top: 0.5em;
+	background:#e7ecf4;
+}
+
+.content input:not([type]) {
+	border-radius: 4px;
+}
+
+.content input[type='submit'] {
+	border-radius: 7px;
+}
+
+.content textarea {
+	border-radius:7px;
+}
+
+.content table input:not([type='radio']):not([type='checkbox']) {
+	margin: 0 0 4px 10px;
 }
 
 .content textarea { 
-    min-height: 12em; 
-    resize: vertical; 
+	min-height: 12em; 
+	resize: vertical; 
 }
 
 /* General button formatting */
 
 input.danger { 
-    color: #cc2f2e; 
+	color: #cc2f2e; 
 }
 
 input[type=submit] { 
-    align-self: start; 
-    min-width: 10em; 
+	align-self: start; 
+	min-width: 10em; 
 }

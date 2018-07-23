@@ -1,28 +1,28 @@
 {% extends 'base.html' %}
 
 {% block header %}
-    <h1>{% block title %}Entries{% endblock %}</h1>
-    {% if g.user %}
-        <a class="action" href="{{ url_for('entry.create') }}">New</a>
-    {% endif %}
+	<h1>{% block title %}Entries{% endblock %}</h1>
+	{% if g.user %}
+		<a class="action" href="{{ url_for('entry.create') }}">New</a>
+	{% endif %}
 {% endblock %}
 
 {% block content %}
-    {% for entry in entries %}
-        <article class="post">
-            <header>
-                <div>
-                    <h1>{{ entry['name'] }}</h1>
-                    {% if g.user['id'] == entry['author_id'] %}
-                        <a class="action" href="{{ url_for('entry.update', id=entry['id']) }}">Edit</a>
-                    {% endif %}
-                    <div class="about">created on {{ entry['created'].strftime('%Y-%m-%d') }}</div>
-                </div>
-            </header>
-            <p class="descr">{{ entry['descr'] }}</p>
-        </article>
-        {% if not loop.last %}
-            <hr>
-        {% endif %}
-    {% endfor %}
+	{% for entry in entries %}
+		<article class="post">
+			<header>
+				<div>
+					<h1>{{ entry['name'] }}</h1>
+					{% if g.user['id'] == entry['author_id'] %}
+						<a class="action" href="{{ url_for('entry.update', id=entry['id']) }}">Edit</a>
+					{% endif %}
+					<div class="about">created on {{ entry['created'].strftime('%Y-%m-%d') }}</div>
+				</div>
+			</header>
+			<p class="descr">{{ entry['descr'] }}</p>
+		</article>
+		{% if not loop.last %}
+			<hr>
+		{% endif %}
+	{% endfor %}
 {% endblock %}
