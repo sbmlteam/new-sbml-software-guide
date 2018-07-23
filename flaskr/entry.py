@@ -5,6 +5,7 @@ from werkzeug.exceptions import abort
 
 from flaskr.auth import login_required
 from flaskr.db import get_db
+from entrydata import *
 
 bp = Blueprint('entry', __name__)
 
@@ -12,7 +13,7 @@ bp = Blueprint('entry', __name__)
 def index():
 	db = get_db()
 	posts = db.execute(
-		'SELECT p.id, name, descr, created, author_id, username'
+		'SELECT *'
 		' FROM post p JOIN user u ON p.author_id = u.id'
 		' ORDER BY created DESC'
 	).fetchall()
@@ -21,14 +22,11 @@ def index():
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
 def create():
+	entry=None
 	if request.method == 'POST':
-		name = request.form['name']
-		descr = request.form['descr']
-		error = None
+		entry = Entry(request.form, g)
+		error = entry.get_error()
 		
-		if not name:
-			error = 'Please name your post!'
-			
 		if error is not None:
 			flash(error)
 		else:
@@ -36,16 +34,16 @@ def create():
 			db.execute(
 				'INSERT INTO post (name, descr, author_id)'
 				' VALUES(?, ?, ?)', 
-				(name, descr, g.user['id'])
+				(entry['name'], entry['descr'], g.user['id'])
 			)
 			db.commit()
 			return redirect(url_for('entry.index'))
 			
-	return render_template('entry/update.html', entry=None, edit=False)
+	return render_template('entry/update.html', entry=entry, edit=False)
 
 def get_post(id, check_author=True):
 	post = get_db().execute(
-		'SELECT p.id, name, descr, created, author_id, username'
+		'SELECT *'
 		' FROM post p JOIN user u ON p.author_id = u.id'
 		' WHERE p.id = ?',
 		(id,)
@@ -65,12 +63,8 @@ def update(id):
 	post = get_post(id)
 	
 	if request.method == 'POST':
-		name = request.form['name']
-		descr = request.form['descr']
-		error = None
-		
-		if not name:
-			error = 'Please name your post!'
+		entry = Entry(request.form)
+		error = entry.get_error()
 		
 		if error is not None:
 			flash(error)
@@ -79,7 +73,7 @@ def update(id):
 			db.execute(
 				'UPDATE post SET name = ?, descr = ?'
 				' WHERE id = ?',
-				(name, descr, id)
+				(entry['name'], entry['descr'], id)
 			)
 			db.commit()
 			return redirect(url_for('entry.index'))
@@ -89,7 +83,7 @@ def update(id):
 @bp.route('/<int:id>/delete', methods=('POST',))
 @login_required
 def delete(id):
-	get_post(id)
+	get_post(id) # make sure the post exists
 	db = get_db()
 	db.execute('DELETE FROM post WHERE id = ?', (id,))
 	db.commit()

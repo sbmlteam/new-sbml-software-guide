@@ -17,27 +17,20 @@ CREATE TABLE post (
 	name TEXT NOT NULL,
 	contact TEXT NOT NULL,
 	version TEXT NOT NULL,
-	website TEXT NOT NULL,
+	site TEXT NOT NULL,
 	descr TEXT NOT NULL,
 	tags TEXT NOT NULL,
 
 	src TEXT NOT NULL,
-	dependency NUMERIC NOT NULL,
+	dependency TEXT NOT NULL,
 	sbml_lvl TEXT NOT NULL,
 	sbml_pkg TEXT NOT NULL,
 	uses TEXT NOT NULL,
 	lib TEXT NOT NULL,
 
-	-- os checklist
-	os_win INTEGER NOT NULL, -- integer = boolean
-	os_mac INTEGER NOT NULL,
-	os_linux INTEGER NOT NULL,
-	os_web INTEGER NOT NULL,
-	os_ios INTEGER NOT NULL,
-	os_android INTEGER NOT NULL,
-	os_na INTEGER NOT NULL,
-	os_other TEXT NOT NULL,
-	
+	-- os list
+	os TEXT NOT NULL
+
 	-- fee checklist
 	fee_academic INTEGER NOT NULL,
 	fee_nonprofit INTEGER NOT NULL,
