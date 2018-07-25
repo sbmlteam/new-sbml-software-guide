@@ -14,22 +14,24 @@ CREATE TABLE post (
 	created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
 	-- Inputted by user --
-	name TEXT NOT NULL,
+	name TEXT UNIQUE NOT NULL,
 	contact TEXT NOT NULL,
+	contact_me INTEGER, -- INTEGER = bool
 	version TEXT NOT NULL,
 	site TEXT NOT NULL,
 	descr TEXT NOT NULL,
 	tags TEXT NOT NULL,
 
-	src TEXT NOT NULL,
+	-- src TEXT NOT NULL,
 	dependency TEXT NOT NULL,
-	sbml_lvl TEXT NOT NULL,
+	dependency_other INTEGER,
+	/* sbml_lvl TEXT NOT NULL,
 	sbml_pkg TEXT NOT NULL,
 	uses TEXT NOT NULL,
-	lib TEXT NOT NULL,
+	lib TEXT NOT NULL,*/
 
 	-- os list
-	os TEXT NOT NULL
+	-- os TEXT NOT NULL,
 
 	-- fee checklist
 	fee_academic INTEGER NOT NULL,
@@ -38,7 +40,7 @@ CREATE TABLE post (
 	fee_commercial INTEGER NOT NULL,
 
 	-- optional parameters
-	contact TEXT,
+	contact_info TEXT,
 	doi TEXT,
 	citation TEXT,
 	api TEXT,

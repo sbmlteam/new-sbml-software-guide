@@ -21,39 +21,39 @@
 		<table class="simple">
 			<tr>
 				<td><label class="container">
-					<input name="contact" id="contact" value="Use my username" type="radio">
+					<input name="contact" id="contact" value="Use my username" type="radio" {{'checked="checked"' if select_contact else ""}} >
 					<span class="checkmark button"></span>
 				</label></td>
 				<td>Use my username</td>
 			</tr>
 			<tr>
 				<td><label class="container">
-					<input name="contact" id="contact_other" value="Other" type="radio">
+					<input name="contact" id="contact_other" value="Other" type="radio" {{'checked="checked"' if not select_contact else ""}} >
 					<span class="checkmark button"></span>
 				</label></td>
-				<td>Other:<input name="contact_other_txt" id="contact_other_txt"></td>
+				<td>Other:<input name="contact_other_txt" id="contact_other_txt" value="{{ entry['contact'] if not select_contact else ""}}"> </td>
 			 </tr>
 		</table>
 
 		<label for="name">The name of the software</label>
 		<h5>Please OMIT the version number. A separate question asks for the version number below.</h5>
-		<input name="name" id="name" value="{{ request.form['name'] or entry['name'] }}" required>
+		<input name="name" id="name" value="{{ entry['name'] }}" required>
 
 		<label for="version">The most recent version of the software</label>
 		<h5>Versions are often expressed as a series of numbers and letters, such as "1.1", "3.1.1", or similar.</h5>
-		<input name="version" id="version" required>
+		<input name="version" id="version" value="{{ entry['version'] }}" required>
 
 		<label for="site">The website or home page for the software</label>
 		<h5>This can be a page that describes the software, or perhaps a GitHub repository if that's the home for the software. (Note: this should NOT be a link to download the software.)</h5>
-		<input name="site" id="site" required>
+		<input name="site" id="site" value="{{ entry['site'] }}" required>
 		
 		<label for="descr">A short description of the software</label>
 		<h5>Please provide a brief description of up to 1024 characters, suitable for use on a web page listing of different SBML software tools. What is your software's main purpose? What does it do? What kind of problems is it designed to address?</h5>
-		<textarea name="descr" id="descr" required>{{ request.form['descr'] or entry['descr'] }}</textarea>
+		<textarea name="descr" id="descr" required>{{ entry['descr'] }}</textarea>
 
 		<label for="tags">Key phrases to describe features of the software</label>
 		<h5>Please write as many key phrases as you can think of to describe features and capabilities of your software. This is where you can describe the capabilities of your software, including simulation methods, modeling frameworks used, types of analysis methods, and anything else that distinguishes your software. Write each phrase on a separate line, and use as many key phrases as you like. Capitalization does not matter. Example: "discrete stochastic simulation; parameter search; graphical plots; batch processing; command-line interface."</h5>
-		<textarea name="tags" id="tags" required></textarea>
+		<textarea name="tags" id="tags" required>{{ entry['tags'] }}</textarea>
 
 		<label for="os">Operating systems supported by the software</label>
 		<h5>Please check all that apply.</h5>
@@ -121,24 +121,24 @@
 		<table class="simple">
 			<tr>
 				<td><label class="container">
-					<input name="dependency" id="dependency_no" value="No" type="radio">
+						<input name="dependency" id="dependency_no" value="No" type="radio" {{'checked="checked"' if select_dependency==0 else ""}}>
 					<span class="checkmark button"></span>
 				</label></td>
 				<td>No</td>
 			</tr>
 			<tr>
 				<td><label class="container">
-					<input name="dependency" id="dependency_yes" value="Yes" type="radio">
+						<input name="dependency" id="dependency_yes" value="Yes" type="radio" {{'checked="checked"' if select_dependency==1 else ""}}>
 					<span class="checkmark button"></span>
 				</label></td>
-				<td>Yes:<input name="dependency_yes_txt" id="dependency_yes_txt"></td>
+				<td>Yes:<input name="dependency_yes_txt" id="dependency_yes_txt" value={{entry['dependency'] if select_dependency==1 else ""}} ></td>
 			</tr>
 			<tr>
 				<td><label class="container">
-					<input name="dependency" id="dependency_other" value="Other" type="radio">
+						<input name="dependency" id="dependency_other" value="Other" type="radio" {{'checked="checked"' if select_dependency==2 else ""}}>
 					<span class="checkmark button"></span>
 				</label></td>
-				<td>Other:<input name="dependency_other_txt" id="dependency_other_txt"></td>
+				<td>Other:<input name="dependency_other_txt" id="dependency_other_txt" value={{entry['dependency'] if select_dependency==2 else ""}} ></td>
 			</tr>
 		</table>
 
@@ -154,12 +154,12 @@
 				<td>Academic</td>
 
 				<td class="box"><label class="container">
-					<input name="fee_academic" id="free_academic" value="Free" type="radio">
+					<input name="fee_academic" id="free_academic" value="Free" type="radio" {{'checked="checked"' if not entry['fee_academic'] else ""}} >
 					<span class="checkmark button"></span>
 				</label></td>
 
 				<td class="box"><label class="container">
-					<input name="fee_academic" id="fee_academic" value="Fee" type="radio">
+					<input name="fee_academic" id="fee_academic" value="Fee" type="radio" {{'checked="checked"' if entry['fee_academic'] else ""}} >
 					<span class="checkmark button"></span>
 				</label></td>
 			</tr>
@@ -167,12 +167,12 @@
 				<td>Non-Profit</td>
 
 				<td class="box"><label class="container">
-					<input name="fee_nonprofit" id="free_nonprofit" value="Free" type="radio">
+					<input name="fee_nonprofit" id="free_nonprofit" value="Free" type="radio" {{'checked="checked"' if not entry['fee_nonprofit'] else ""}} >
 					<span class="checkmark button"></span>
 				</label></td>
 
 				<td class="box"><label class="container">
-					<input name="fee_nonprofit" id="fee_nonprofit" value="Fee" type="radio">
+					<input name="fee_nonprofit" id="fee_nonprofit" value="Fee" type="radio" {{'checked="checked"' if entry['fee_nonprofit'] else ""}} >
 					<span class="checkmark button"></span>
 				</label></td>
 			</tr>
@@ -180,12 +180,12 @@
 				<td>Government</td>
 
 				<td class="box"><label class="container">
-					<input name="fee_govt" id="free_govt" value="Free" type="radio">
+					<input name="fee_govt" id="free_govt" value="Free" type="radio" {{'checked="checked"' if not entry['fee_govt'] else ""}} >
 					<span class="checkmark button"></span>
 				</label></td>
 
 				<td class="box"><label class="container">
-					<input name="fee_govt" id="fee_govt" value="Fee" type="radio">
+					<input name="fee_govt" id="fee_govt" value="Fee" type="radio" {{'checked="checked"' if entry['fee_govt'] else ""}}>
 					<span class="checkmark button"></span>
 				</label></td>
 			</tr>
@@ -193,12 +193,12 @@
 				<td>Commercial</td>
 
 				<td class="box"><label class="container">
-					<input name="fee_commercial" id="free_commercial" value="Free" type="radio">
+					<input name="fee_commercial" id="free_commercial" value="Free" type="radio" {{'checked="checked"' if not entry['fee_commercial'] else ""}} >
 					<span class="checkmark button"></span>
 				</label></td>
 
 				<td class="box"><label class="container">
-					<input name="fee_commercial" id="fee_commercial" value="Fee" type="radio">
+					<input name="fee_commercial" id="fee_commercial" value="Fee" type="radio" {{'checked="checked"' if entry['fee_commercial'] else ""}} >
 					<span class="checkmark button"></span>
 				</label></td>
 			</tr>

@@ -30,16 +30,13 @@ def create():
 		if error is not None:
 			flash(error)
 		else:
-			db = get_db()
-			db.execute(
-				'INSERT INTO post (name, descr, author_id)'
-				' VALUES(?, ?, ?)', 
-				(entry['name'], entry['descr'], g.user['id'])
-			)
-			db.commit()
+			entry.insert(get_db())
 			return redirect(url_for('entry.index'))
-			
-	return render_template('entry/update.html', entry=entry, edit=False)
+	
+	# we set select _contact and _dependency to their defaults
+
+	return render_template('entry/update.html', select_contact=1,
+			select_dependency=0, entry=entry, edit=False)
 
 def get_post(id, check_author=True):
 	post = get_db().execute(
@@ -63,22 +60,20 @@ def update(id):
 	post = get_post(id)
 	
 	if request.method == 'POST':
-		entry = Entry(request.form)
+		entry = Entry(request.form, g)
 		error = entry.get_error()
 		
 		if error is not None:
 			flash(error)
 		else:
-			db = get_db()
-			db.execute(
-				'UPDATE post SET name = ?, descr = ?'
-				' WHERE id = ?',
-				(entry['name'], entry['descr'], id)
-			)
-			db.commit()
+			entry.update(get_db(), id)
 			return redirect(url_for('entry.index'))
+
+	select_contact = post['contact_me']
+	select_dependency = 0 if post['dependency'] == "No" else (1 if not post['dependency_other'] else 2)
 	
-	return render_template('entry/update.html', entry=post, edit=True)
+	return render_template('entry/update.html', select_contact=select_contact, 
+			select_dependency=select_dependency, entry=post, edit=True)
 	
 @bp.route('/<int:id>/delete', methods=('POST',))
 @login_required
