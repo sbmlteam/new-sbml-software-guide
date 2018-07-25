@@ -68,7 +68,7 @@ td {
 	border: 0;
 }
 
-table:not(.simple) td:first-child, th:first-child{
+.complex table td:first-child, th:first-child{
 	border-right: 2px solid #2a5f82;
 }
 
@@ -224,7 +224,7 @@ nav ul li a, nav ul li span, header .action {
 	flex: neto; 
 }
 
-.post .about { 
+.about { 
 	color: slategray; 
 	font-style: italic; 
 }

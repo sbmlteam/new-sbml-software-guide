@@ -53,6 +53,13 @@ def get_post(id, check_author=True):
 		abort(403)
 	
 	return post
+
+@bp.route('/<int:id>/view', methods=('GET', 'POST'))
+@login_required
+def view(id):
+	entry = get_post(id)
+
+	return render_template('entry/view.html', entry=entry)
 	
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required

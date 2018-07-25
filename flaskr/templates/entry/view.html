@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}{{ entry['name'] }} {{ entry['version']}}{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+	<p></p>
+
+	<div>{{ entry['descr'] }}</div>
+	
+	<p></p>
+
+	<div class="about">{{ entry['tags'] }}</div>
+
+	<p></p>
+
+	<label>More Information</label>
+	<table class="complex">
+		<tr>
+			<td>Dependencies</td>
+			<td>{{ entry['dependency'] }}</td>
+		</tr>
+		<tr>
+			<td>Fees</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Most Recent Version</td>
+			<td>{{ entry['version'] }}</td>
+		</tr>
+		<tr>
+			<td>Website/Home Page</td>
+			<td><a href="{{ entry['site'] }}">{{ entry['site'] }}</a></td>
+		</tr>
+		<tr>
+			<td>Contact</td>
+			<td>{{ entry['contact'] }}</td>
+		</tr>
+	</table>
+{% endblock %}
