@@ -31,7 +31,8 @@ CREATE TABLE post (
 	lib TEXT NOT NULL,*/
 
 	-- os list
-	-- os TEXT NOT NULL,
+	os TEXT NOT NULL,
+	os_other INTEGER,
 
 	-- fee checklist
 	fee_academic INTEGER NOT NULL,

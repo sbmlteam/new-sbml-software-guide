@@ -1,3 +1,5 @@
+import json
+
 class Entry:
 
 	def __init__(self, form, g):
@@ -30,8 +32,13 @@ class Entry:
 
 		# fetch operating systems
 		self.os = form.getlist('os')
-		if self.os == 'Other':
-			self.os.append(form['os_other_txt'])
+		if "Other" in self.os:
+			self.os_other = 1
+			self.os.insert(0, form['os_other_txt'])
+		else:
+			self.os_other = 0
+		# we use json.dumps because self.os is a list but we need a string
+		self.os = json.dumps(self.os)
 
 		# fee marking
 		self.fee_academic = self.get_fee('fee_academic', form)
@@ -59,10 +66,11 @@ class Entry:
 		db.execute(
 			'INSERT INTO post'
 			' (author_id, name, contact, contact_me, version, site, descr, tags,'
-			' dependency, dependency_other, fee_academic, fee_nonprofit, fee_govt, fee_commercial)'
-			' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+			' dependency, dependency_other, os, os_other, fee_academic, fee_nonprofit,'
+			' fee_govt, fee_commercial)'
+			' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
 			(self.author_id, self.name, self.contact, self.contact_me, self.version, self.site, 
-			self.descr, self.tags, self.dependency, self.dependency_other,
+			self.descr, self.tags, self.dependency, self.dependency_other, self.os, self.os_other,
 			self.fee_academic, self.fee_nonprofit, self.fee_govt, self.fee_commercial)
 		)
 		db.commit()
@@ -72,11 +80,11 @@ class Entry:
 		db.execute(
 			'UPDATE post SET'
 			' name = ?, contact = ?, contact_me = ?, version = ?, site = ?, descr = ?, tags = ?,'
-			' dependency = ?, dependency_other = ?, fee_academic = ?, fee_nonprofit = ?,'
-			' fee_govt = ?, fee_commercial = ?'
+			' dependency = ?, dependency_other = ?, os = ?, os_other = ?, fee_academic = ?,'
+			' fee_nonprofit = ?, fee_govt = ?, fee_commercial = ?'
 			' WHERE id = ?',
 			(self.name, self.contact, self.contact_me, self.version, self.site, self.descr, self.tags,
-			self.dependency, self.dependency_other, self.fee_academic, self.fee_nonprofit,
-			self.fee_govt, self.fee_commercial, id)
+			self.dependency, self.dependency_other, self.os, self.os_other, self.fee_academic, 
+			self.fee_nonprofit, self.fee_govt, self.fee_commercial, id)
 		)
 		db.commit()

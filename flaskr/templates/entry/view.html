@@ -7,6 +7,11 @@
 {% block content %}
 	<p></p>
 
+	{% if g.user['id'] == entry['author_id'] %}
+		<a class="action" href="{{ url_for('entry.update', id=entry['id']) }}">Edit</a>
+	{% endif %}
+	<p></p>
+
 	<div>{{ entry['descr'] }}</div>
 	
 	<p></p>
@@ -22,8 +27,13 @@
 			<td>{{ entry['dependency'] }}</td>
 		</tr>
 		<tr>
-			<td>Fees</td>
-			<td></td>
+			<td>Costs</td>
+			<td>
+				<i>Academic:</i> {{"For a fee" if entry['fee_academic'] else "Free" }}<br>
+				<i>Non-Profit:</i> {{"For a fee" if entry['fee_nonprofit'] else "Free" }}<br>
+				<i>Government:</i> {{"For a fee" if entry['fee_govt'] else "Free" }}<br>
+				<i>Commercial:</i> {{"For a fee" if entry['fee_commercial'] else "Free" }}
+			</td>
 		</tr>
 		<tr>
 			<td>Most Recent Version</td>

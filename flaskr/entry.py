@@ -7,6 +7,8 @@ from flaskr.auth import login_required
 from flaskr.db import get_db
 from entrydata import *
 
+import json
+
 bp = Blueprint('entry', __name__)
 
 @bp.route('/')
@@ -36,7 +38,7 @@ def create():
 	# we set select _contact and _dependency to their defaults
 
 	return render_template('entry/update.html', select_contact=1,
-			select_dependency=0, entry=entry, edit=False)
+			select_dependency=0, entry=entry, os_list=[], edit=False)
 
 def get_post(id, check_author=True):
 	post = get_db().execute(
@@ -77,10 +79,11 @@ def update(id):
 			return redirect(url_for('entry.index'))
 
 	select_contact = post['contact_me']
-	select_dependency = 0 if post['dependency'] == "No" else (1 if not post['dependency_other'] else 2)
+	select_dependency = 0 if post['dependency'] == "None" else (1 if not post['dependency_other'] else 2)
 	
 	return render_template('entry/update.html', select_contact=select_contact, 
-			select_dependency=select_dependency, entry=post, edit=True)
+			select_dependency=select_dependency, os_list=json.loads(post['os']), 
+			entry=post, edit=True)
 	
 @bp.route('/<int:id>/delete', methods=('POST',))
 @login_required
