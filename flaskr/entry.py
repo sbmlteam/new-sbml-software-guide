@@ -61,7 +61,10 @@ def get_post(id, check_author=True):
 def view(id):
 	entry = get_post(id)
 
-	return render_template('entry/view.html', entry=entry)
+	os_list=json.loads(entry['os'])
+	if "Other" in os_list: os_list.remove("Other")
+
+	return render_template('entry/view.html', os_list=os_list, entry=entry)
 	
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
