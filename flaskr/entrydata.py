@@ -3,6 +3,8 @@ import json
 class Entry:
 
 	def __init__(self, form, g):
+		self.error = None
+
 		self.author_id = g.user['id']
 		# fetch basic forms
 		self.name = form['name']
@@ -21,14 +23,16 @@ class Entry:
 			self.contact_me = 0
 
 		# fetch dependency
-		self.dependency = form['dependency']
-		self.dependency_other = 0
-		if self.dependency == 'Yes':
-			# self.depenency_other = 0
-			self.dependency = form['dependency_yes_txt']
-		elif self.dependency == 'Other':
-			self.dependency_other = 1
-			self.dependency = form['dependency_other_txt']
+		try: 
+			self.dependency = form['dependency']
+			self.dependency_other = 0
+			if self.dependency == 'Yes':
+				# self.depenency_other = 0
+				self.dependency = form['dependency_yes_txt']
+			elif self.dependency == 'Other':
+				self.dependency_other = 1
+				self.dependency = form['dependency_other_txt']
+		except: self.error = 'Please select the dependencies your software has!'
 
 		# fetch operating systems
 		self.os = form.getlist('os')
@@ -51,13 +55,33 @@ class Entry:
 
 	# returns 0 if there's no fee; else 1
 	def get_fee(self, name, form):
-		return 0 if form[name] == 'Free' else 1
+		try: return 0 if form[name] == 'Free' else 1
+		except: return -1
 
 	# returns any applicable errors
 	def get_error(self):
 		error = None
-		if not self.name:
+		if self.error:
+			error = self.error
+		elif not self.name:
 			error = 'Please name your entry!'
+		elif not self.version:
+			error = 'Please enter a version!'
+		elif not self.descr:
+			error = 'Please provide a description of your software!'
+		elif len(self.descr) > 1024:
+			error = 'Please provide a shorter description of your software!'
+		elif not self.tags:
+			error = 'Please enter some key phrases to describe your software!'
+		elif len(self.tags.splitlines()) < 3:
+			error = 'Please enter more phrases to describe your software!'
+		elif self.os == json.dumps([]):
+			error = 'Please select the operating systems your software supports!'
+		elif not self.dependency:
+			error = 'Please select the dependencies your software has!'
+		elif (self.fee_academic == -1 or self.fee_nonprofit == -1 or
+			self.fee_govt == -1 or self.fee_commercial == -1):
+			error = 'Please finish your fees section!'
 		
 		return error
 

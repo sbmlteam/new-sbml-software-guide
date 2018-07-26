@@ -68,7 +68,7 @@ td {
 	border: 0;
 }
 
-.complex table td:first-child, th:first-child{
+td:first-child, th:first-child{
 	border-right: 2px solid #2a5f82;
 }
 

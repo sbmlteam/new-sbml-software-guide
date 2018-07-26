@@ -45,14 +45,14 @@
 
 		<label for="site">The website or home page for the software</label>
 		<h5>This can be a page that describes the software, or perhaps a GitHub repository if that's the home for the software. (Note: this should NOT be a link to download the software.)</h5>
-		<input name="site" id="site" value="{{ entry['site'] }}" required>
+		<input name="site" id="site" value="{{ entry['site'] }}">
 		
 		<label for="descr">A short description of the software</label>
 		<h5>Please provide a brief description of up to 1024 characters, suitable for use on a web page listing of different SBML software tools. What is your software's main purpose? What does it do? What kind of problems is it designed to address?</h5>
 		<textarea name="descr" id="descr" required>{{ entry['descr'] }}</textarea>
 
 		<label for="tags">Key phrases to describe features of the software</label>
-		<h5>Please write as many key phrases as you can think of to describe features and capabilities of your software. This is where you can describe the capabilities of your software, including simulation methods, modeling frameworks used, types of analysis methods, and anything else that distinguishes your software. Write each phrase on a separate line, and use as many key phrases as you like. Capitalization does not matter. Example: "discrete stochastic simulation; parameter search; graphical plots; batch processing; command-line interface."</h5>
+		<h5>Please write as many key phrases as you can think of to describe features and capabilities of your software. This is where you can describe the capabilities of your software, including simulation methods, modeling frameworks used, types of analysis methods, and anything else that distinguishes your software. We require at least 3, but enter as many as you can think of! This is the main method people will search for your software. Write each phrase on a separate line, and use as many key phrases as you like. Capitalization does not matter. Example: "discrete stochastic simulation; parameter search; graphical plots; batch processing; command-line interface."</h5>
 		<textarea name="tags" id="tags" required>{{ entry['tags'] }}</textarea>
 
 		<label for="os">Operating systems supported by the software</label>
