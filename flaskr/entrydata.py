@@ -100,14 +100,24 @@ class Entry:
 		db.commit()
 
 	# updates this entry in the database
-	def update(self, db, id):
+	def update(self, db, id, g):
+		# we need to check if it's an admin editing, since
+		# their username shouldn't overwrite the original one
+		if g.user['admin'] == 1 and self.contact_me:
+			contact = db.execute(
+				'SELECT contact FROM post WHERE id = ?',
+				(id, )
+			).fetchone()['contact']
+		else:
+			contact = self.contact
+
 		db.execute(
 			'UPDATE post SET'
 			' name = ?, contact = ?, contact_me = ?, version = ?, site = ?, descr = ?, tags = ?,'
 			' dependency = ?, dependency_other = ?, os = ?, os_other = ?, fee_academic = ?,'
 			' fee_nonprofit = ?, fee_govt = ?, fee_commercial = ?'
 			' WHERE id = ?',
-			(self.name, self.contact, self.contact_me, self.version, self.site, self.descr, self.tags,
+			(self.name, contact, self.contact_me, self.version, self.site, self.descr, self.tags,
 			self.dependency, self.dependency_other, self.os, self.os_other, self.fee_academic, 
 			self.fee_nonprofit, self.fee_govt, self.fee_commercial, id)
 		)

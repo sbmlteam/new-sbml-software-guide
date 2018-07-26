@@ -35,8 +35,8 @@ def register():
 			
 		if error is None:
 			db.execute(
-				'INSERT INTO user (username, password) VALUES (?, ?)',
-				(username, generate_password_hash(password))
+				'INSERT INTO user (username, password, admin) VALUES (?, ?, ?)',
+				(username, generate_password_hash(password), 0)
 			)
 			db.commit()
 			return redirect(url_for('auth.login'))

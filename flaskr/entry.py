@@ -51,15 +51,16 @@ def get_post(id, check_author=True):
 	if post is None:
 		abort(404, "Entry id {0} doesn't exist.".format(id))
 		
-	if check_author and post['author_id'] != g.user['id']:
+	if (check_author and 
+			post['author_id'] != g.user['id'] and
+			g.user['admin'] != 1):
 		abort(403)
 	
 	return post
 
 @bp.route('/<int:id>/view', methods=('GET', 'POST'))
-@login_required
 def view(id):
-	entry = get_post(id)
+	entry = get_post(id, False)
 
 	os_list=json.loads(entry['os'])
 	if "Other" in os_list: os_list.remove("Other")
@@ -78,7 +79,7 @@ def update(id):
 		if error is not None:
 			flash(error)
 		else:
-			entry.update(get_db(), id)
+			entry.update(get_db(), id, g)
 			return redirect(url_for('entry.index'))
 
 	select_contact = post['contact_me']

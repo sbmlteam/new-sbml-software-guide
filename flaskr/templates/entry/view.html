@@ -7,7 +7,7 @@
 {% block content %}
 	<p></p>
 
-	{% if g.user['id'] == entry['author_id'] %}
+	{% if (g.user['id'] == entry['author_id'] or g.user['admin'] == 1) %}
 		<a class="action" href="{{ url_for('entry.update', id=entry['id']) }}">Edit</a>
 	{% endif %}
 	<p></p>

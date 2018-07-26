@@ -2,6 +2,7 @@
 
 import os
 import sys
+from werkzeug.security import generate_password_hash
 from argparse import ArgumentParser
 
 from flask import Flask
@@ -48,6 +49,13 @@ def create_app(test_config=None, init=False, python_called=False):
 	if init:
 		with app.app_context():
 			db.init_db()
+			db_instance = db.get_db()
+			db_instance.execute(
+				'INSERT INTO user (username, password, admin) VALUES (?, ?, ?)',
+				("admin@sbml.com", generate_password_hash("admin"), 1)
+			)
+			db_instance.commit()
+
 
 	app.register_blueprint(auth.bp)
 	app.register_blueprint(entry.bp)

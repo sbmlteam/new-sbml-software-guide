@@ -13,7 +13,7 @@
 			<header>
 				<div>
 					<h1><a href="{{ url_for('entry.view', id=entry['id']) }} ">{{ entry['name'] }}</a></h1>
-					{% if g.user['id'] == entry['author_id'] %}
+					{% if (g.user['id'] == entry['author_id'] or g.user['admin'] == 1) %}
 						<a class="action" href="{{ url_for('entry.update', id=entry['id']) }}">Edit</a>
 					{% endif %}
 					<div class="about">created on {{ entry['created'].strftime('%Y-%m-%d') }}</div>
