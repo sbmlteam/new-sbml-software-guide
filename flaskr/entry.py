@@ -6,6 +6,7 @@ from werkzeug.exceptions import abort
 from flaskr.auth import login_required
 from flaskr.db import get_db
 from entrydata import *
+from search import *
 
 import json
 
@@ -97,3 +98,8 @@ def delete(id):
 	db.execute('DELETE FROM post WHERE id = ?', (id,))
 	db.commit()
 	return redirect(url_for('entry.index'))
+
+@bp.route('/search', methods=('GET', 'POST'))
+def search():
+	search = Search()
+	return render_template('entry/search.html', search=search)

@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Search{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+<form method="post">
+	<label for="keywords">Keywords</label>
+	<h5>Separate using commas (ie: command-line, stochastic simulation, analysis)</h5>
+	<input name="keywords" id="keywords"></input>
+
+	<label for="os">Required OS Support</label>
+	<table class="simple">
+		<tr>
+			<td><label class="container">
+					<input name="os" id="os_win" value="Windows" type="checkbox" {{"checked" if "Windows" in search['os_list'] else "" }} >
+				<span class="checkmark"></span>
+			</label></td>
+			<td>Windows</td>
+		</tr>
+		<tr>
+			<td><label class="container">
+				<input name="os" id="os_mac" value="Mac" type="checkbox" {{"checked" if "Mac" in search['os_list'] else "" }} >
+				<span class="checkmark"></span>
+			</label></td>
+			<td>Mac</td>
+		</tr>
+		<tr>
+			<td><label class="container">
+				<input name="os" id="os_linux" value="Linux" type="checkbox" {{"checked" if "Linux" in search['os_list'] else "" }} >
+				<span class="checkmark"></span>
+			</label></td>
+			<td>Linux</td>
+		</tr>
+		<tr>
+			<td><label class="container">
+				<input name="os" id="os_web" value="Web Browser" type="checkbox" {{"checked" if "Web Browser" in search['os_list'] else "" }} >
+				<span class="checkmark"></span>
+			</label></td>
+			<td>Web Browser</td>
+		</tr>
+		<tr>
+			<td><label class="container">
+				<input name="os" id="os_ios" value="iOS" type="checkbox" {{"checked" if "iOS" in search['os_list'] else "" }} >
+				<span class="checkmark"></span>
+			</label></td>
+			<td>iOS</td>
+		</tr>
+		<tr>
+			<td><label class="container">
+				<input name="os" id="os_android" value="Android" type="checkbox" {{"checked" if "Android" in search['os_list'] else "" }} >
+				<span class="checkmark"></span>
+			</label></td>
+			<td>Android</td>
+		</tr>
+		<tr>
+			<td><label class="container">
+				<input name="os" id="os_na" value="Not Relevant" type="checkbox" {{"checked" if "Not Relevant" in search['os_list'] else "" }} >
+				<span class="checkmark"></span>
+			</label></td>
+			<td>Not Relevant (e.g., if it's a cloud-based network service)</td>
+		</tr>
+		<tr>
+			<td><label class="container">
+					<input name="os" id="os_other" value="Other" type="checkbox" {{"checked" if search['os_other'] else ""}} >
+				<span class="checkmark"></span>
+			</label></td>
+			<td>Other:<input name="os_other_txt" id="os_other_txt" value={{search['os_list'][0] if search['os_other'] else ""}} ></td>
+		</tr>
+	</table>
+
+	<label for="fee">Required Costs</label>
+	<h5>Must be free for...</h5>
+	<table class="simple">
+		<tr>
+			<td><label class="container">
+				<input name="fee_academic" id="free_academic" value="Free" type="checkbox" {{"checked" if search['academic'] else ""}} >
+				<span class="checkmark"></span>
+			</label></td>
+			<td>Academic</td>
+		</tr>
+		<tr>
+			<td><label class="container">
+				<input name="fee_nonprofit" id="free_nonprofit" value="Free" type="checkbox" {{"checked" if search['nonprofit'] else ""}} >
+				<span class="checkmark"></span>
+			</label></td>
+			<td>Non-Profit</td>
+		</tr>
+		<tr>
+			<td><label class="container">
+				<input name="fee_govt" id="free_govt" value="Free" type="checkbox" {{"checked" if search['govt'] else ""}} >
+				<span class="checkmark"></span>
+			</label></td>
+			<td>Government</td>
+		</tr>
+		<tr>
+			<td><label class="container">
+				<input name="fee_commercial" id="free_commercial" value="Free" type="checkbox" {{"checked" if search['commercial'] else ""}} >
+				<span class="checkmark"></span>
+			</label></td>
+			<td>Commercial</td>
+		</tr>
+	</table>
+
+	<label for="dependency">Required Dependencies</label>
+	<table class="simple">
+		<tr>
+			<td><label class="container">
+				<input name="dependency" id="no_dependencies" value="None" type="radio" {{"checked" if not search['dependency'] else ""}} >
+				<span class="checkmark button"></span>
+			</label></td>
+			<td>No Dependencies</td>
+		</tr>
+		<tr>
+			<td><label class="container">
+				<input name="dependency" id="dependencies" value="Yes" type="radio" {{"checked" if search['dependency'] else ""}} >
+				<span class="checkmark button"></span>
+			</label></td>
+			<td>Acceptable Dependencies:<input name="os_other_txt" id="os_other_txt" value={{search['dependency_list'] if search['dependency'] else ""}} ></td>
+	</table>
+
+	<p />
+	<input type="submit" value="Search">
+</form>
+
+{% endblock %}
