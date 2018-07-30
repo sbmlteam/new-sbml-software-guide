@@ -6,6 +6,7 @@ from werkzeug.security import generate_password_hash
 from argparse import ArgumentParser
 
 from flask import Flask
+from search import *
 
 def create_app(test_config=None, init=False, python_called=False):
 	# create and configure the app

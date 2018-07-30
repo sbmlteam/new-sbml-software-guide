@@ -2,17 +2,17 @@
 <title>{% block title %}{% endblock %} - SBML Software Guide </title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <nav>
-	<h1><a href="{{ url_for('entry.index') }}">SBML Software Guide</a></h1>
+	<h1><a href="{{ url_for('entry.index', search=search) }}">SBML Software Guide</a></h1>
 	<ul>
 		{% if g.user %}
 			<li><span>{{ g.user['username'] }}</span>
-			<li><a href="{{ url_for('profile.profile') }}">Profile</a>
-			<li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+			<li><a href="{{ url_for('profile.profile', search=search) }}">Profile</a>
+			<li><a href="{{ url_for('auth.logout', search=search) }}">Log Out</a>
 		{% else %}
-			<li><a href="{{ url_for('auth.register') }}">Register</a>
-			<li><a href="{{ url_for('auth.login') }}">Log In</a>
+			<li><a href="{{ url_for('auth.register', search=search) }}">Register</a>
+			<li><a href="{{ url_for('auth.login', search=search) }}">Log In</a>
 		{% endif %}
-			<li><a href="{{ url_for('entry.search') }}">New Search</a>
+			<li><a href="{{ url_for('entry.search', search=search) }}">New Search</a>
 	</ul>
 </nav>
 <section class="content">

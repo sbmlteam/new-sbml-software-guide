@@ -13,5 +13,5 @@
 		<input type="submit" value="Log In">
 	</form>
 	<hr>
-	<a href="{{ url_for("auth.recover") }}">Forgot Password</a>
+	<a href="{{ url_for("auth.recover", search=search) }}">Forgot Password</a>
 {% endblock %}

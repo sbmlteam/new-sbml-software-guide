@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block header %}
-	<h1><a href="{{ url_for('profile.profile') }}">{% block title %}Profile{% endblock %}</a></h1>
+	<h1><a href="{{ url_for('profile.profile', search=search) }}">{% block title %}Profile{% endblock %}</a></h1>
 {% endblock %}
 
 {% block content %}
 	<p>
 		User <strong>{{email}}</strong>
-		<a style="float:right;" href="{{ url_for('profile.settings') }}">Settings</a>
+		<a style="float:right;" href="{{ url_for('profile.settings', search=search) }}">Settings</a>
 	</p>
 	<hr>
 	<form method="post">
@@ -15,7 +15,7 @@
 		<table>
 			{% for entry in entries %}
 			<tr>
-				<a href="{{ url_for('entry.update', id=entry['id']) }}">{{ entry['name']}}</a>
+				<a href="{{ url_for('entry.update', id=entry['id'], search=search) }}">{{ entry['name']}}</a>
 			</tr>
 			{% endfor %}
 		</table>

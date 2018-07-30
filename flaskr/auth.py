@@ -8,6 +8,7 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from flaskr.db import get_db
+from entry import get_search
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -39,11 +40,11 @@ def register():
 				(username, generate_password_hash(password), 0)
 			)
 			db.commit()
-			return redirect(url_for('auth.login'))
+			return redirect(url_for('auth.login', search=get_search(request)))
 			
 		flash(error)
 		
-	return render_template('auth/register.html')
+	return render_template('auth/register.html', search=get_search(request))
 	
 @bp.route('/recover', methods=('GET', 'POST'))
 def recover():
@@ -66,11 +67,11 @@ def recover():
 			# TODO: Send email
 
 			db.commit()
-			return redirect(url_for('auth.recover_sent', email=username))
+			return redirect(url_for('auth.recover_sent', email=username, search=get_search(request)))
 			
 		flash(error)
 		
-	return render_template('auth/recover.html')
+	return render_template('auth/recover.html', search=get_search(request))
 
 @bp.route('/recover/sent', methods=('GET', 'POST'))
 def recover_sent():
@@ -95,8 +96,8 @@ def recover_sent():
 		else:
 			db.execute('UPDATE user SET password = ? WHERE username = ?', (generate_password_hash(passworda), email))
 			db.commit()
-			return redirect(url_for('auth.login'))
-	return render_template('auth/recover_sent.html', email=email)
+			return redirect(url_for('auth.login', search=get_search(request)))
+	return render_template('auth/recover_sent.html', email=email, search=get_search(request))
 	
 @bp.route('/recover/success', methods=('GET', 'POST'))
 def success():
@@ -122,11 +123,11 @@ def login():
 		if error is None:
 			session.clear()
 			session['user_id'] = user['id']
-			return redirect(url_for('index'))
+			return redirect(url_for('index', search=get_search(request)))
 			
 		flash(error)
 		
-	return render_template('auth/login.html')
+	return render_template('auth/login.html', search=get_search(request))
 	
 @bp.before_app_request
 def load_logged_in_user():
@@ -142,7 +143,7 @@ def load_logged_in_user():
 @bp.route('/logout')
 def logout():
 	session.clear()
-	return redirect(url_for('index'))
+	return redirect(url_for('index', search=get_search(request)))
 
 @bp.route('/delete', methods=('GET', 'POST'))
 def delete():
@@ -151,13 +152,13 @@ def delete():
 	db.execute('DELETE FROM post WHERE author_id = ?', (user_id,))
 	db.execute('DELETE FROM user WHERE id = ?', (user_id,))
 	db.commit()
-	return redirect(url_for('entry.index'))
+	return redirect(url_for('entry.index', search=get_search(request)))
 
 def login_required(view):
 	@functools.wraps(view)
 	def wrapped_view(**kwargs):
 		if g.user is None:
-			return redirect(url_for('auth.login'))
+			return redirect(url_for('auth.login', search=get_search(request)))
 			
 		return view(**kwargs)
 	

@@ -3,7 +3,7 @@
 {% block header %}
 	<h1>{% block title %}Entries{% endblock %}</h1>
 	{% if g.user %}
-		<a class="action" href="{{ url_for('entry.create') }}">New</a>
+		<a class="action" href="{{ url_for('entry.create', search=search) }}">New</a>
 	{% endif %}
 {% endblock %}
 
@@ -12,9 +12,9 @@
 		<article class="post">
 			<header>
 				<div>
-					<h1><a href="{{ url_for('entry.view', id=entry['id']) }} ">{{ entry['name'] }}</a></h1>
+					<h1><a href="{{ url_for('entry.view', id=entry['id'], search=search) }} ">{{ entry['name'] }}</a></h1>
 					{% if (g.user['id'] == entry['author_id'] or g.user['admin'] == 1) %}
-						<a class="action" href="{{ url_for('entry.update', id=entry['id']) }}">Edit</a>
+						<a class="action" href="{{ url_for('entry.update', id=entry['id'], search=search) }}">Edit</a>
 					{% endif %}
 					<div class="about">created on {{ entry['created'].strftime('%Y-%m-%d') }}</div>
 				</div>

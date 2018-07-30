@@ -15,7 +15,7 @@ CREATE TABLE post (
 	created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
 	-- Inputted by user --
-	name TEXT UNIQUE NOT NULL,
+	name TEXT NOT NULL,
 	contact TEXT NOT NULL,
 	contact_me INTEGER, -- INTEGER = bool
 	version TEXT NOT NULL,

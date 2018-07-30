@@ -6,10 +6,10 @@
 
 {% block content %}
 	<form method="post">
-		<a href="{{ url_for('auth.recover') }}">Change Password</a>
+		<a href="{{ url_for('auth.recover', search=search) }}">Change Password</a>
 	</form>
 	<hr>
-	<form action="{{ url_for('auth.delete') }}" method="post">
+	<form action="{{ url_for('auth.delete', search=search) }}" method="post">
 		<input class="danger" type="submit" value="Delete Account" onclick="return confirm('Are you sure you want to delete your account? Your entries will be deleted also!');">
 	</form>
 {% endblock %}

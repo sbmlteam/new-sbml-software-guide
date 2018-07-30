@@ -8,8 +8,8 @@
 
 <form method="post">
 	<label for="keywords">Keywords</label>
-	<h5>Separate using commas (ie: command-line, stochastic simulation, analysis)</h5>
-	<input name="keywords" id="keywords"></input>
+	<h5>Separate using commas (eg: command-line, stochastic simulation, analysis)</h5>
+	<input name="keywords" id="keywords" value={{search['keywords']}}></input>
 
 	<label for="os">Required OS Support</label>
 	<table class="simple">
@@ -76,28 +76,28 @@
 	<table class="simple">
 		<tr>
 			<td><label class="container">
-				<input name="fee_academic" id="free_academic" value="Free" type="checkbox" {{"checked" if search['academic'] else ""}} >
+				<input name="fee" id="free_academic" value="Academic" type="checkbox" {{"checked" if search['academic'] else ""}} >
 				<span class="checkmark"></span>
 			</label></td>
 			<td>Academic</td>
 		</tr>
 		<tr>
 			<td><label class="container">
-				<input name="fee_nonprofit" id="free_nonprofit" value="Free" type="checkbox" {{"checked" if search['nonprofit'] else ""}} >
+				<input name="fee" id="free_nonprofit" value="Non-Profit" type="checkbox" {{"checked" if search['nonprofit'] else ""}} >
 				<span class="checkmark"></span>
 			</label></td>
 			<td>Non-Profit</td>
 		</tr>
 		<tr>
 			<td><label class="container">
-				<input name="fee_govt" id="free_govt" value="Free" type="checkbox" {{"checked" if search['govt'] else ""}} >
+				<input name="fee" id="free_govt" value="Government" type="checkbox" {{"checked" if search['govt'] else ""}} >
 				<span class="checkmark"></span>
 			</label></td>
 			<td>Government</td>
 		</tr>
 		<tr>
 			<td><label class="container">
-				<input name="fee_commercial" id="free_commercial" value="Free" type="checkbox" {{"checked" if search['commercial'] else ""}} >
+				<input name="fee" id="free_commercial" value="Commercial" type="checkbox" {{"checked" if search['commercial'] else ""}} >
 				<span class="checkmark"></span>
 			</label></td>
 			<td>Commercial</td>
@@ -105,6 +105,7 @@
 	</table>
 
 	<label for="dependency">Required Dependencies</label>
+	<h5>Separate acceptable dependencies using commas (eg: MATLAB)</h5>
 	<table class="simple">
 		<tr>
 			<td><label class="container">
@@ -118,7 +119,7 @@
 				<input name="dependency" id="dependencies" value="Yes" type="radio" {{"checked" if search['dependency'] else ""}} >
 				<span class="checkmark button"></span>
 			</label></td>
-			<td>Acceptable Dependencies:<input name="os_other_txt" id="os_other_txt" value={{search['dependency_list'] if search['dependency'] else ""}} ></td>
+			<td>Acceptable Dependencies:<input name="dependency_list" id="dependency_list" value={{search['dependency_list'] if search['dependency'] else ""}} ></td>
 	</table>
 
 	<p />
