@@ -13,8 +13,11 @@ import json
 bp = Blueprint('entry', __name__)
 
 def get_search(request):
-	# return Search() if not request.args['search'] else request.args['search']
-	return request.args['search']
+	try:
+		return Search(request.args['search'])
+	except:
+		return Search("-")
+	# return Search(request.args['search'])
 
 @bp.route('/')
 def index():
@@ -107,5 +110,9 @@ def delete(id):
 def search():
 	search = get_search(request)
 	if request.method == 'POST':
+		if not search:
+			search = Search("-")
 		search.set(request.form)
-	return render_template('entry/search.html', search=Search(search))
+		return redirect(url_for('entry.index', search=search))
+	
+	return render_template('entry/search.html', search=search)

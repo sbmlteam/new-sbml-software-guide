@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block content %}
+	<div class="about">Search: {{ search.pretty_str() }}</div>
 	{% for entry in entries %}
 		<article class="post">
 			<header>

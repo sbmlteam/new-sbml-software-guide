@@ -109,7 +109,14 @@
 	<table class="simple">
 		<tr>
 			<td><label class="container">
-				<input name="dependency" id="no_dependencies" value="None" type="radio" {{"checked" if not search['dependency'] else ""}} >
+				<input name="dependency" id="any_dependencies" value="Any" type="radio" {{"checked" if not search['dependency'] and not search['no_dependency'] else ""}} >
+				<span class = "checkmark button"></span>
+			</label></td>
+			<td>Any Dependencies</td>
+		</tr>
+		<tr>
+			<td><label class="container">
+				<input name="dependency" id="no_dependencies" value="None" type="radio" {{"checked" if search['no_dependency'] else ""}} >
 				<span class="checkmark button"></span>
 			</label></td>
 			<td>No Dependencies</td>
@@ -120,6 +127,7 @@
 				<span class="checkmark button"></span>
 			</label></td>
 			<td>Acceptable Dependencies:<input name="dependency_list" id="dependency_list" value={{search['dependency_list'] if search['dependency'] else ""}} ></td>
+		</tr>
 	</table>
 
 	<p />
