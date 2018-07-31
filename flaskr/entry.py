@@ -105,7 +105,7 @@ def delete(id):
 
 @bp.route('/search', methods=('GET', 'POST'))
 def search():
-	search = Search()
+	search = get_search(request)
 	if request.method == 'POST':
 		search.set(request.form)
-	return render_template('entry/search.html', search=search)
+	return render_template('entry/search.html', search=Search(search))

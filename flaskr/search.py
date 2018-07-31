@@ -1,18 +1,27 @@
 class Search:
 
 	def __init__(self):
-		self.keywords = ""
+		self.setup({})
 
-		self.os_other = 0
-		self.os_list = []
+	def setup(self, temp_vars):
+		self.keywords = temp_vars.get("keywords", "")
 
-		self.academic = 0
-		self.nonprofit = 0
-		self.govt = 0
-		self.commercial = 0
+		self.os_other = int(temp_vars.get("os_other", 0))
+		self.os_list = list(temp_vars.get("os_list", []))
 
-		self.dependency = 0
-		self.dependency_list = ""
+		self.academic = int(temp_vars.get("academic", 0))
+		self.nonprofit = int(temp_vars.get("nonprofit", 0))
+		self.govt = int(temp_vars.get("govt", 0))
+		self.commercial = int(temp_vars.get("commercial", 0))
+
+		self.dependency = int(temp_vars.get("dependency", 0))
+		self.dependency_list = list(temp_vars.get("dependency_list", ""))
+
+	def __init__(self, input_str):
+		no_tuples = input_str.split(" ")
+		tuples = [s.split("-") for s in no_tuples]
+		temp_vars = dict(tuples)
+		self.setup(temp_vars)
 
 	def __getitem__(self, arg):
 		return getattr(self, arg)
@@ -42,3 +51,11 @@ class Search:
 		else:
 			self.dependency = 1
 			self.dependency_list = form['dependency_list']
+
+		print (self.__str__())
+	
+	def __str__(self):
+		return " ".join(
+				[str(attr) + "-" + str(self[str(attr)])
+				for attr in dir(self) if not callable(getattr(self, attr)) and not attr.startswith("__")]
+				)
