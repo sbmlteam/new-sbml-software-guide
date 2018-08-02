@@ -2,10 +2,11 @@ class Search:
 
 	# assigns relevant variables using an inputted dictionary
 	def setup(self, temp_vars):
-		self.keywords = temp_vars.get("keywords", "")
+		self.keywords = temp_vars.get("keywords", "").split(", ")
 
 		self.os_other = int(temp_vars.get("os_other", 0))
-		self.os_list = temp_vars.get("os_list", [])
+		self.os_list = temp_vars.get("os_list", "").split(", ")
+		print ("init", self.os_list)
 
 		self.academic = int(temp_vars.get("academic", 0))
 		self.nonprofit = int(temp_vars.get("nonprofit", 0))
@@ -14,8 +15,11 @@ class Search:
 
 		self.dependency = int(temp_vars.get("dependency", 0))
 		self.no_dependency = int(temp_vars.get("no_dependency", 0))
-		self.dependency_list = temp_vars.get("dependency_list", "")
+		self.dependency_list = temp_vars.get("dependency_list", "").split(", ")
+		print (self.dependency_list)
+		print (", ".join(self.dependency_list))
 
+	# works off a URL string to create a search object
 	def __init__(self, input_str):
 		no_tuples = input_str.split(";")
 		tuples = [s.split("-") for s in no_tuples]
@@ -26,11 +30,13 @@ class Search:
 		return getattr(self, arg)
 
 	# sets its values based on those of a request.form
+	# works off of a submitted form to modify an extant search
 	def set(self, form):
-		self.keywords = form['keywords']
+		self.keywords = form['keywords'].split(", ")
 
 		# fetch operating systems
 		self.os_list = form.getlist('os')
+		print (self.os_list)
 		if "Other" in self.os_list:
 			self.os_other = 1
 			self.os_list.insert(0, form['os_other_txt'])
@@ -47,26 +53,31 @@ class Search:
 		# get dependencies
 		if form['dependency'] == 'None':
 			self.no_dependency = 1
-		if form['dependency'] == 'Yes':
+			self.dependency = 0
+		elif form['dependency'] == 'Yes':
 			self.dependency = 1
-			self.dependency_list = form['dependency_list']
-		# else:
-			# self.dependency = 0
-			# self.no_dependency = 0
+			self.no_dependency = 0
+			self.dependency_list = form['dependency_list'].split(", ")
+		else:
+			self.dependency = 0
+			self.no_dependency = 0
 
 		print (self.__str__())
 	
 	# converts the object to a URL-safe string
 	def __str__(self):
-		return ";".join(
-				[str(attr) + "-" + str(self[str(attr)])
+		url = [str(attr) + "-" + (
+					", ".join(self[str(attr)]) 
+					if (type(self[str(attr)]) == type([])) 
+					# if (attr == 'dependency_list')
+					else str(self[str(attr)]))
 				for attr in dir(self) if not callable(getattr(self, attr)) and not attr.startswith("__")]
-				)
+		return ";".join(url)
 
 	# returns a pretty version of the object for display
 	def pretty_str(self):
 		display_str = ""
-		if self.keywords: display_str += "Keywords: \"" + self.keywords + "\"; "
+		if self.keywords: display_str += "Keywords: \"" + ", ".join(self.keywords) + "\"; "
 		if self.academic: display_str += "Free for academic use; "
 		if self.nonprofit: display_str += "Free for nonprofit use; "
 		if self.govt: display_str += "Free for government use; "
@@ -76,9 +87,7 @@ class Search:
 		else: display_str += "Any dependencies; "
 		
 		if self.os_list: 
-			# real list, going from ['foo', 'bar'] to a real list:
-			# remove outer [], split by commas then remove '' from each item
-			os_list_list = [item[1:len(item)-1] for item in self.os_list[1:len(self.os_list)-1].split(", ")]
+			os_list_list = self.os_list
 			# remove 'Other' from the end of the list if it's there
 			if self.os_other:
 				del os_list_list[len(os_list_list)-1]
@@ -87,3 +96,9 @@ class Search:
 
 		# remove the '; ' from the last item
 		return display_str[0:len(display_str)-2]
+
+	# returns a real list from its string representation
+	def get_list(self, string):
+		# going from ['foo', 'bar'] to a real list:
+		# remove outer [], split by commas then remove '' from each item
+		return [item[1:len(item)-1] for item in string[1:len(string)-1].split(", ")]

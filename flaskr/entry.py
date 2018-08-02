@@ -22,12 +22,21 @@ def get_search(request):
 @bp.route('/')
 def index():
 	db = get_db()
-	posts = db.execute(
-		'SELECT *'
-		' FROM post p JOIN user u ON p.author_id = u.id'
-		' ORDER BY created DESC'
-	).fetchall()
-	return render_template('entry/index.html', entries=posts, search=get_search(request))
+	search=get_search(request)
+	cmd = (
+		"SELECT *" +
+		" FROM post p JOIN user u ON p.author_id = u.id"
+		)
+	print (search.no_dependency)
+	print (bool(search.no_dependency))
+	if search.no_dependency:
+		cmd += " WHERE dependency = \"\""
+	
+	cmd += " ORDER BY created DESC"
+	
+	posts = db.execute(cmd).fetchall()
+	# TODO: sort posts by search
+	return render_template('entry/index.html', entries=posts, search=search)
 	
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
@@ -115,4 +124,5 @@ def search():
 		search.set(request.form)
 		return redirect(url_for('entry.index', search=search))
 	
+	print ("search function", ", ".join(search['dependency_list']))
 	return render_template('entry/search.html', search=search)

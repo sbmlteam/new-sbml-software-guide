@@ -9,7 +9,7 @@
 <form method="post">
 	<label for="keywords">Keywords</label>
 	<h5>Separate using commas (eg: command-line, stochastic simulation, analysis)</h5>
-	<input name="keywords" id="keywords" value={{search['keywords']}}></input>
+	<input name="keywords" id="keywords" value="{{", ".join(search['keywords'])}}"></input>
 
 	<label for="os">Required OS Support</label>
 	<table class="simple">
@@ -67,7 +67,7 @@
 					<input name="os" id="os_other" value="Other" type="checkbox" {{"checked" if search['os_other'] else ""}} >
 				<span class="checkmark"></span>
 			</label></td>
-			<td>Other:<input name="os_other_txt" id="os_other_txt" value={{search['os_list'][0] if search['os_other'] else ""}} ></td>
+			<td>Other:<input name="os_other_txt" id="os_other_txt" value="{{search['os_list'][0] if search['os_other'] else ""}}" ></td>
 		</tr>
 	</table>
 
@@ -126,7 +126,7 @@
 				<input name="dependency" id="dependencies" value="Yes" type="radio" {{"checked" if search['dependency'] else ""}} >
 				<span class="checkmark button"></span>
 			</label></td>
-			<td>Acceptable Dependencies:<input name="dependency_list" id="dependency_list" value={{search['dependency_list'] if search['dependency'] else ""}} ></td>
+			<td>Acceptable Dependencies:<input name="dependency_list" id="dependency_list" value="{{", ".join(search['dependency_list']) if search['dependency'] else ""}}" ></td>
 		</tr>
 	</table>
 
