@@ -23,21 +23,31 @@ def get_search(request):
 def index():
 	db = get_db()
 	search=get_search(request)
-	cmd = (
+
+	# we make a list of select commands and then union them
+	base_cmd = (
 		"SELECT p.rowid, *" +
 		" FROM post p JOIN user u ON p.author_id = u.id"
 		)
-	print (search.no_dependency)
-	print (bool(search.no_dependency))
+	cmd_list = []
+	cmd_list.append(base_cmd)
+
+	# dependency term
 	if search.no_dependency:
-		cmd += " WHERE dependency = \"\""
-	
-	cmd += " ORDER BY created DESC"
+		cmd_list[0] += " WHERE dependency = \"\""
+	elif search.dependency:
+		cmd_list[0] += " WHERE p.dependency MATCH '" + " OR ".join(search.dependency_list) + "'"
+
+	# keyword term
+	if len(search.keywords[0]) > 0:
+		cmd_list.append(base_cmd + " WHERE post MATCH '" +" AND ".join(search.keywords) + "'")
+
+	# joins all the search terms and sorts them
+	cmd = " UNION ".join(cmd_list) + " ORDER BY created DESC"
+
+	print (cmd)
 	
 	posts = db.execute(cmd).fetchall()
-	# TODO: sort posts by search
-	for entry in posts:
-		print (entry['id'])
 	return render_template('entry/index.html', entries=posts, search=search)
 	
 @bp.route('/create', methods=('GET', 'POST'))

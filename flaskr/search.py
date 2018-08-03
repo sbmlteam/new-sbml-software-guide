@@ -84,8 +84,8 @@ class Search:
 		if self.govt: display_str += "Free for government use" + s
 		if self.commercial: display_str += "Free for commercial use" + s
 		if self.dependency_list and self.dependency: display_str += "Acceptable dependencies: " + ", ".join(self.dependency_list) + s
-		elif self.no_dependency: display_str += "No dependencies; "
-		else: display_str += "Any dependencies; "
+		elif self.no_dependency: display_str += "No dependencies" + s
+		else: display_str += "Any dependencies" + s
 		
 		if self.os_list: 
 			os_list_list = self.os_list
