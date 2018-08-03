@@ -15,7 +15,7 @@
 		<table>
 			{% for entry in entries %}
 			<tr>
-				<a href="{{ url_for('entry.update', id=entry['id'], search=search) }}">{{ entry['name']}}</a>
+				<a href="{{ url_for('entry.update', id=entry['rowid'], search=search) }}">{{ entry['name']}}</a>
 			</tr>
 			{% endfor %}
 		</table>

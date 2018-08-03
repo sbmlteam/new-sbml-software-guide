@@ -11,7 +11,7 @@ bp = Blueprint('profile', __name__, url_prefix='/profile')
 def profile():
 	db = get_db()
 	entries = db.execute(
-		'SELECT p.id, name' 
+		'SELECT p.rowid, name' 
 		' FROM post p JOIN user u ON p.author_id = u.id'
 		' ORDER BY created DESC'
 	).fetchall()

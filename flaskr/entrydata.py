@@ -1,9 +1,13 @@
 import json
+import time
+from datetime import datetime
 
 class Entry:
 
 	def __init__(self, form, g):
 		self.error = None
+
+		self.created = datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d')
 
 		self.author_id = g.user['id']
 		# fetch basic forms
@@ -91,11 +95,12 @@ class Entry:
 			'INSERT INTO post'
 			' (author_id, name, contact, contact_me, version, site, descr, tags,'
 			' dependency, dependency_other, os, os_other, fee_academic, fee_nonprofit,'
-			' fee_govt, fee_commercial)'
-			' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+			' fee_govt, fee_commercial, created)'
+			' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
 			(self.author_id, self.name, self.contact, self.contact_me, self.version, self.site, 
 			self.descr, self.tags, self.dependency, self.dependency_other, self.os, self.os_other,
-			self.fee_academic, self.fee_nonprofit, self.fee_govt, self.fee_commercial)
+			self.fee_academic, self.fee_nonprofit, self.fee_govt, self.fee_commercial,
+			self.created)
 		)
 		db.commit()
 

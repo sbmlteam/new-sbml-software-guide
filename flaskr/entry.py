@@ -24,7 +24,7 @@ def index():
 	db = get_db()
 	search=get_search(request)
 	cmd = (
-		"SELECT *" +
+		"SELECT p.rowid, *" +
 		" FROM post p JOIN user u ON p.author_id = u.id"
 		)
 	print (search.no_dependency)
@@ -36,6 +36,8 @@ def index():
 	
 	posts = db.execute(cmd).fetchall()
 	# TODO: sort posts by search
+	for entry in posts:
+		print (entry['id'])
 	return render_template('entry/index.html', entries=posts, search=search)
 	
 @bp.route('/create', methods=('GET', 'POST'))
@@ -59,9 +61,9 @@ def create():
 
 def get_post(id, check_author=True):
 	post = get_db().execute(
-		'SELECT *'
+		'SELECT p.rowid,*'
 		' FROM post p JOIN user u ON p.author_id = u.id'
-		' WHERE p.id = ?',
+		' WHERE p.rowid = ?',
 		(id,)
 	).fetchone()
 	
@@ -111,7 +113,7 @@ def update(id):
 def delete(id):
 	get_post(id) # make sure the post exists
 	db = get_db()
-	db.execute('DELETE FROM post WHERE id = ?', (id,))
+	db.execute('DELETE FROM post WHERE rowid = ?', (id,))
 	db.commit()
 	return redirect(url_for('entry.index', search=get_search(request)))
 

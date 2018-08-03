@@ -227,6 +227,7 @@ nav ul li a, nav ul li span, header .action {
 .about { 
 	color: slategray; 
 	font-style: italic; 
+	white-space: pre-wrap;
 }
 
 .post .descr { 
