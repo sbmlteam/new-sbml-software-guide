@@ -43,7 +43,7 @@ def index():
 		cmd_list.append(base_cmd + " WHERE post MATCH '" +" AND ".join(search.keywords) + "'")
 
 	# joins all the search terms and sorts them
-	cmd = " UNION ".join(cmd_list) + " ORDER BY created DESC"
+	cmd = " INTERSECT ".join(cmd_list) + " ORDER BY created DESC"
 
 	print (cmd)
 	
@@ -138,3 +138,8 @@ def search():
 	
 	print ("search function", ", ".join(search['dependency_list']))
 	return render_template('entry/search.html', search=search)
+
+@bp.route('/search_clear', methods=('GET', ))
+def search_clear():
+	search = Search("-")
+	return redirect(url_for('entry.index', search=search))

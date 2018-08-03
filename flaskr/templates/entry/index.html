@@ -9,7 +9,7 @@
 
 {% block content %}
 	<p></p>
-	<div class="about"><strong>Search:</strong><br /> {{ search.pretty_str() }}</div>
+	<div class="about"><strong>Search </strong><a href="{{ url_for('entry.search_clear') }}">(Clear)</a><strong>:</strong><br />{{ search.pretty_str() }}</div>
 	<hr>
 	{% for entry in entries %}
 		<article class="post">

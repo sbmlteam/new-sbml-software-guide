@@ -78,16 +78,16 @@ class Search:
 	def pretty_str(self):
 		display_str = "\t"
 		s = "\n\t" # stands for separator; inserted between items
-		if self.keywords: display_str += "Keywords: " + ", ".join(self.keywords) + s
+		if len(self.keywords[0]) > 0: display_str += "Keywords: " + ", ".join(self.keywords) + s
 		if self.academic: display_str += "Free for academic use" + s
 		if self.nonprofit: display_str += "Free for nonprofit use" + s
 		if self.govt: display_str += "Free for government use" + s
 		if self.commercial: display_str += "Free for commercial use" + s
 		if self.dependency_list and self.dependency: display_str += "Acceptable dependencies: " + ", ".join(self.dependency_list) + s
 		elif self.no_dependency: display_str += "No dependencies" + s
-		else: display_str += "Any dependencies" + s
+		# else: display_str += "Any dependencies" + s
 		
-		if self.os_list: 
+		if len(self.os_list[0]) > 0: 
 			os_list_list = self.os_list
 			# remove 'Other' from the end of the list if it's there
 			if self.os_other:
@@ -96,7 +96,8 @@ class Search:
 			display_str += "Required OS support: " + ", ".join(os_list_list) + s
 
 		# remove the separator from the last item
-		return display_str[0:len(display_str)-len(s)]
+		display_str = display_str[0:len(display_str)-len(s)]
+		return display_str if len(display_str) > 0 else "\tNone"
 
 	# returns a real list from its string representation
 	def get_list(self, string):
