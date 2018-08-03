@@ -121,7 +121,7 @@ class Entry:
 			' name = ?, contact = ?, contact_me = ?, version = ?, site = ?, descr = ?, tags = ?,'
 			' dependency = ?, dependency_other = ?, os = ?, os_other = ?, fee_academic = ?,'
 			' fee_nonprofit = ?, fee_govt = ?, fee_commercial = ?'
-			' WHERE id = ?',
+			' WHERE rowid = ?',
 			(self.name, contact, self.contact_me, self.version, self.site, self.descr, self.tags,
 			self.dependency, self.dependency_other, self.os, self.os_other, self.fee_academic, 
 			self.fee_nonprofit, self.fee_govt, self.fee_commercial, id)

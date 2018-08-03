@@ -79,10 +79,10 @@ class Search:
 		display_str = "\t"
 		s = "\n\t" # stands for separator; inserted between items
 		if self.keywords: display_str += "Keywords: " + ", ".join(self.keywords) + s
-		if self.academic: display_str += "Free for academic use; "
-		if self.nonprofit: display_str += "Free for nonprofit use; "
-		if self.govt: display_str += "Free for government use; "
-		if self.commercial: display_str += "Free for commercial use; "
+		if self.academic: display_str += "Free for academic use" + s
+		if self.nonprofit: display_str += "Free for nonprofit use" + s
+		if self.govt: display_str += "Free for government use" + s
+		if self.commercial: display_str += "Free for commercial use" + s
 		if self.dependency_list and self.dependency: display_str += "Acceptable dependencies: " + ", ".join(self.dependency_list) + s
 		elif self.no_dependency: display_str += "No dependencies; "
 		else: display_str += "Any dependencies; "
@@ -93,7 +93,7 @@ class Search:
 			if self.os_other:
 				del os_list_list[len(os_list_list)-1]
 
-			display_str += "OS Support: " + ", ".join(os_list_list) + s
+			display_str += "Required OS support: " + ", ".join(os_list_list) + s
 
 		# remove the separator from the last item
 		return display_str[0:len(display_str)-len(s)]
