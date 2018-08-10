@@ -8,15 +8,15 @@ from flask import (
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
-import guide
-from guide.db import get_db
+import sbmlguide
+from sbmlguide.db import get_db
 
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
-	from guide.entry import get_search
+	from sbmlguide.entry import get_search
 	if request.method == 'POST':
 		username = request.form['username']
 		password = request.form['password']
@@ -51,7 +51,7 @@ def register():
 	
 @bp.route('/recover', methods=('GET', 'POST'))
 def recover():
-	from guide.entry import get_search
+	from sbmlguide.entry import get_search
 	if request.method == 'POST':
 		username = request.form['username']
 		db = get_db()
@@ -79,7 +79,7 @@ def recover():
 
 @bp.route('/recover/sent', methods=('GET', 'POST'))
 def recover_sent():
-	from guide.entry import get_search
+	from sbmlguide.entry import get_search
 	email = request.args['email']
 	if request.method == 'POST':
 		code = request.form['code']
@@ -111,7 +111,7 @@ def success():
 		
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
-	from guide.entry import get_search
+	from sbmlguide.entry import get_search
 	if request.method == 'POST':
 		username = request.form['username']
 		password = request.form['password']
@@ -148,13 +148,13 @@ def load_logged_in_user():
 		
 @bp.route('/logout')
 def logout():
-	from guide.entry import get_search
+	from sbmlguide.entry import get_search
 	session.clear()
 	return redirect(url_for('index', search=get_search(request)))
 
 @bp.route('/delete', methods=('GET', 'POST'))
 def delete():
-	from guide.entry import get_search
+	from sbmlguide.entry import get_search
 	user_id = session.get('user_id')
 	db = get_db()
 	db.execute('DELETE FROM post WHERE author_id = ?', (user_id,))
@@ -163,7 +163,7 @@ def delete():
 	return redirect(url_for('entry.index', search=get_search(request)))
 
 def login_required(view):
-	from guide.entry import get_search
+	from sbmlguide.entry import get_search
 	@functools.wraps(view)
 	def wrapped_view(**kwargs):
 		if g.user is None:

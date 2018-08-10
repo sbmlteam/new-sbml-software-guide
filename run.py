@@ -6,8 +6,8 @@
 # @website https://github.com/sbmlteam/new-sbml-software-guide
 # =============================================================================
 
-import guide
-from guide.__main__ import main as main
+import sbmlguide
+from sbmlguide.__main__ import main as main
 
 # Hand over to the command line interface.
 if __name__ == '__main__':

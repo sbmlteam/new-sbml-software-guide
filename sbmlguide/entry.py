@@ -3,11 +3,11 @@ from flask import (
 )
 from werkzeug.exceptions import abort
 
-import guide
-from guide.auth import *
-from guide.db import *
-from guide.entrydata import *
-from guide.search import *
+import sbmlguide
+from sbmlguide.auth import *
+from sbmlguide.db import *
+from sbmlguide.entrydata import *
+from sbmlguide.search import *
 
 import json
 

@@ -2,9 +2,9 @@ from flask import (
 	Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
 
-import guide
-from guide.db import get_db
-from guide.entry import get_search
+import sbmlguide
+from sbmlguide.db import get_db
+from sbmlguide.entry import get_search
 
 bp = Blueprint('profile', __name__, url_prefix='/profile')
 

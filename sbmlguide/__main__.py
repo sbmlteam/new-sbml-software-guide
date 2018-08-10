@@ -4,18 +4,18 @@ from argparse import ArgumentParser
 from flask import Flask
 from werkzeug.security import generate_password_hash
 
-# Allow "guide" to be imported.
+# Allow "sbmlguide" to be imported.
 try:
     thisdir = os.path.dirname(os.path.abspath(__file__))
     sys.path.append(os.path.join(thisdir, '..'))
 except:
     sys.path.append('..')
 
-import guide
-from guide import auth
-from guide import db
-from guide import entry
-from guide import profile
+import sbmlguide
+from sbmlguide import auth
+from sbmlguide import db
+from sbmlguide import entry
+from sbmlguide import profile
 
 
 def create_app(test_config=None, init=False, python_called=False):
@@ -23,7 +23,7 @@ def create_app(test_config=None, init=False, python_called=False):
 	app = Flask(__name__, instance_relative_config=True)
 	app.config.from_mapping(
 		SECRET_KEY='dev',
-		DATABASE=os.path.join(app.instance_path, 'guide.sqlite'),
+		DATABASE=os.path.join(app.instance_path, 'sbmlguide.sqlite'),
 	)
 
 	if test_config is None:
