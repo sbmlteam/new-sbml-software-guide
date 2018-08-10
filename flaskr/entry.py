@@ -44,13 +44,19 @@ def index():
 
 	# os term
 	if len(search.os_list[0]) > 0:
-		# if searching for "other" os, require that resuls support AN other os, even if it's not this one
 		os_list = search.os_list
-		if (search.os_other):
-			cmd_list.append(base_cmd + " WHERE os_other = 1")
-			if "Other" in os_list: os_list.remove("Other")
-		# TODO: this doesn't correctly match os's:
+		# matches the appropriate os list
 		cmd_list.append(base_cmd + " WHERE os MATCH '" + " ".join(os_list) + "'")
+
+	# fees term (NOT a keywords search; DOESN'T use fts4 searching)
+	if (search.academic):
+		cmd_list.append(base_cmd + " WHERE fee_academic = 0")
+	if (search.nonprofit):
+		cmd_list.append(base_cmd + " WHERE fee_nonprofit = 0")
+	if (search.govt):
+		cmd_list.append(base_cmd + " WHERE fee_govt = 0")
+	if (search.commercial):
+		cmd_list.append(base_cmd + " WHERE fee_commercial = 0")
 
 	# joins all the search terms and sorts them
 	if len(cmd_list) > 0:
