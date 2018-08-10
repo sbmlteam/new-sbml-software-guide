@@ -3,10 +3,11 @@ from flask import (
 )
 from werkzeug.exceptions import abort
 
-from flaskr.auth import login_required
-from flaskr.db import get_db
-from entrydata import *
-from search import *
+import guide
+from guide.auth import *
+from guide.db import *
+from guide.entrydata import *
+from guide.search import *
 
 import json
 
