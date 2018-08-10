@@ -90,8 +90,8 @@ class Search:
 		if len(self.os_list[0]) > 0: 
 			os_list_list = self.os_list
 			# remove 'Other' from the end of the list if it's there
-			if self.os_other:
-				del os_list_list[len(os_list_list)-1]
+			if "Other" in os_list_list:
+				os_list_list.remove("Other")
 
 			display_str += "Required OS support: " + ", ".join(os_list_list) + s
 

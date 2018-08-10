@@ -34,16 +34,31 @@ def index():
 
 	# dependency term
 	if search.no_dependency:
-		cmd_list[0] += " WHERE dependency = \"\""
+		cmd_list.append(base_cmd + " WHERE dependency = \"\"")
 	elif search.dependency:
-		cmd_list[0] += " WHERE p.dependency MATCH '" + " OR ".join(search.dependency_list) + "'"
+		cmd_list.append(base_cmd + " WHERE p.dependency MATCH '" + " OR ".join(search.dependency_list) + " OR \"None\"'")
 
 	# keyword term
 	if len(search.keywords[0]) > 0:
 		cmd_list.append(base_cmd + " WHERE post MATCH '" +" AND ".join(search.keywords) + "'")
 
+	# os term
+	if len(search.os_list[0]) > 0:
+		# if searching for "other" os, require that resuls support AN other os, even if it's not this one
+		os_list = search.os_list
+		if (search.os_other):
+			cmd_list.append(base_cmd + " WHERE os_other = 1")
+			if "Other" in os_list: os_list.remove("Other")
+		# TODO: this doesn't correctly match os's:
+		cmd_list.append(base_cmd + " WHERE os MATCH '" + " ".join(os_list) + "'")
+
 	# joins all the search terms and sorts them
-	cmd = " INTERSECT ".join(cmd_list) + " ORDER BY created DESC"
+	if len(cmd_list) > 0:
+		cmd = " INTERSECT ".join(cmd_list) 
+	else:
+		cmd = base_cmd
+	
+	cmd += " ORDER BY created DESC"
 
 	print (cmd)
 	
