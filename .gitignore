@@ -106,3 +106,9 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# Emacs-specific things
+*~
+.#*
+.git/COMMIT_EDITMSG
+TAGS
