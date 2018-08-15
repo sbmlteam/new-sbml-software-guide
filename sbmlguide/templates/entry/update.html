@@ -206,6 +206,424 @@
 			</tr>
 		</table>
 
+		<label for="src">Is the source code available?</label>
+		<h5>Some software uses dual (or more) licensing models, which makes questions like this a challenge. For the purposes of this question, we would like to know about the least restrictive license that is offered.</h5>
+		<table class="simple">
+			<tr>
+				<td><label class="container">
+					<input name="src" id="src_closed" value="0" type="radio" {{"checked" if entry['src'] == "0" else ""}} >
+					<span class="checkmark button"></span>
+				</label></td>
+				<td>Source code is closed/proprietary</td>
+			</tr>
+			<tr>
+				<td><label class="container">
+					<input name="src" id="src_partial" value="1" type="radio" {{"checked" if entry['src'] == "1" else ""}} >
+					<span class="checkmark button"></span>
+				</label></td>
+				<td>Source code is partially available, or is available under restricted terms</td>
+			</tr>
+			<tr>
+				<td><label class="container">
+					<input name="src" id="src_open" value="2" type="radio" {{"checked" if entry['src'] == "2" else ""}} >
+					<span class="checkmark button"></span>
+				</label></td>
+				<td>Source code is open under an OSI-approved open-source license</td>
+			</tr>
+			<tr>
+				<td><label class="container">
+					<input name="src" id="src_other" value="3" type="radio" {{"checked" if entry['src'] == "3" else ""}} >
+					<span class="checkmark button"></span>
+				</label></td>
+				<td>Other:<input name="src_other_txt" id="src_other_txt" value="{{entry['src_other_txt'] if entry['src'] == "3" else ""}}"></td>
+			</tr>
+		</table>
+
+		<label for="sbml_lvl">What Level and Version of SBML does the software support?</label>
+		<table class="complex">
+			<tr class="head">
+				<th></th>
+				<th>Import</th>
+				<th>Export</th>
+			</tr>
+			<tr>
+				<td>Level 1 Version 1</td>
+				<td class="box"><label class="container">
+					<input name="sbml_lvl" id="lvl_1_1_i" value="lvl_1_1_i" type="checkbox" {{"checked" if entry['lvl_1_1_i'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_lvl" id="lvl_1_1_e" value="lvl_1_1_e" type="checkbox" {{"checked" if entry['lvl_1_1_e'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+			</tr>
+			<tr>
+				<td>Level 1 Version 2</td>
+				<td class="box"><label class="container">
+					<input name="sbml_lvl" id="lvl_1_2_i" value="lvl_1_2_i" type="checkbox" {{"checked" if entry['lvl_1_2_i'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_lvl" id="lvl_1_2_e" value="lvl_1_2_e" type="checkbox" {{"checked" if entry['lvl_1_2_e'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+			</tr>
+			<tr>
+				<td>Level 2 Version 1</td>
+				<td class="box"><label class="container">
+					<input name="sbml_lvl" id="lvl_2_1_i" value="lvl_2_1_i" type="checkbox" {{"checked" if entry['lvl_2_1_i'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_lvl" id="lvl_2_1_e" value="lvl_2_1_e" type="checkbox" {{"checked" if entry['lvl_2_1_e'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+			</tr>
+			<tr>
+				<td>Level 2 Version 2</td>
+				<td class="box"><label class="container">
+					<input name="sbml_lvl" id="lvl_2_2_i" value="lvl_2_2_i" type="checkbox" {{"checked" if entry['lvl_2_2_i'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_lvl" id="lvl_2_2_e" value="lvl_2_2_e" type="checkbox" {{"checked" if entry['lvl_2_2_e'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+			</tr>
+			<tr>
+				<td>Level 2 Version 3</td>
+				<td class="box"><label class="container">
+					<input name="sbml_lvl" id="lvl_2_3_i" value="lvl_2_3_i" type="checkbox" {{"checked" if entry['lvl_2_3_i'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_lvl" id="lvl_2_3_e" value="lvl_2_3_e" type="checkbox" {{"checked" if entry['lvl_2_3_e'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+			</tr>
+			<tr>
+				<td>Level 2 Version 4</td>
+				<td class="box"><label class="container">
+					<input name="sbml_lvl" id="lvl_2_4_i" value="lvl_2_4_i" type="checkbox" {{"checked" if entry['lvl_2_4_i'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_lvl" id="lvl_2_4_e" value="lvl_2_4_e" type="checkbox" {{"checked" if entry['lvl_2_4_e'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+			</tr>
+			<tr>
+				<td>Level 2 Version 5</td>
+				<td class="box"><label class="container">
+					<input name="sbml_lvl" id="lvl_2_5_i" value="lvl_2_5_i" type="checkbox" {{"checked" if entry['lvl_2_5_i'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_lvl" id="lvl_2_5_e" value="lvl_2_5_e" type="checkbox" {{"checked" if entry['lvl_2_5_e'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+			</tr>
+			<tr>
+				<td>Level 3 Version 1</td>
+				<td class="box"><label class="container">
+					<input name="sbml_lvl" id="lvl_3_1_i" value="lvl_3_1_i" type="checkbox" {{"checked" if entry['lvl_3_1_i'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_lvl" id="lvl_3_1_e" value="lvl_3_1_e" type="checkbox" {{"checked" if entry['lvl_3_1_e'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+			</tr>
+			<tr>
+				<td>Level 3 Version 2</td>
+				<td class="box"><label class="container">
+					<input name="sbml_lvl" id="lvl_3_2_i" value="lvl_3_2_i" type="checkbox" {{"checked" if entry['lvl_3_2_i'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_lvl" id="lvl_3_2_e" value="lvl_3_2_e" type="checkbox" {{"checked" if entry['lvl_3_2_e'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+			</tr>
+		</table>
+
+		<label for="sbml_pkg">Which SBML Level 3 packages does your software support?</label>
+		<h5>Please check those that apply.</h5>
+
+		<table class="complex">
+			<tr class="head">
+				<th></th>
+				<th>Read</th>
+				<th>Write</th>
+				<th>Future support planned</th>
+			</tr>
+			<tr>
+				<td>Arrays</td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_array_r" value="pkg_array_r" type="checkbox" {{"checked" if entry['pkg_array_r'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_array_w" value="pkg_array_w" type="checkbox" {{"checked" if entry['pkg_array_w'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_array_f" value="pkg_array_f" type="checkbox" {{"checked" if entry['pkg_array_f'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+			</tr>
+			<tr>
+				<td>Distributions</td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_distr_r" value="pkg_distr_r" type="checkbox" {{"checked" if entry['pkg_distr_r'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_distr_w" value="pkg_distr_w" type="checkbox" {{"checked" if entry['pkg_distr_w'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_distr_f" value="pkg_distr_f" type="checkbox" {{"checked" if entry['pkg_distr_f'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+			</tr>
+			<tr>
+				<td>Flux Balance Constraints</td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_flux_r" value="pkg_flux_r" type="checkbox" {{"checked" if entry['pkg_flux_r'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_flux_w" value="pkg_flux_w" type="checkbox" {{"checked" if entry['pkg_flux_w'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_flux_f" value="pkg_flux_f" type="checkbox" {{"checked" if entry['pkg_flux_f'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+			</tr>
+			<tr>
+				<td>Groups</td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_groups_r" value="pkg_groups_r" type="checkbox" {{"checked" if entry['pkg_groups_r'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_groups_w" value="pkg_groups_w" type="checkbox" {{"checked" if entry['pkg_groups_w'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_groups_f" value="pkg_groups_f" type="checkbox" {{"checked" if entry['pkg_groups_f'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+			</tr>
+			<tr>
+				<td>Hierarchical Model Composition</td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_heir_r" value="pkg_heir_r" type="checkbox" {{"checked" if entry['pkg_heir_r'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_heir_w" value="pkg_heir_w" type="checkbox" {{"checked" if entry['pkg_heir_w'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_heir_f" value="pkg_heir_f" type="checkbox" {{"checked" if entry['pkg_heir_f'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+			</tr>
+			<tr>
+				<td>Layout</td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_layout_r" value="pkg_layout_r" type="checkbox" {{"checked" if entry['pkg_layout_r'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_layout_w" value="pkg_layout_w" type="checkbox" {{"checked" if entry['pkg_layout_w'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_layout_f" value="pkg_layout_f" type="checkbox" {{"checked" if entry['pkg_layout_f'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+			</tr>
+			<tr>
+				<td>Multistate, multicompartment & multicomponent species</td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_multi_r" value="pkg_multi_r" type="checkbox" {{"checked" if entry['pkg_multi_r'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_multi_w" value="pkg_multi_w" type="checkbox" {{"checked" if entry['pkg_multi_w'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_multi_f" value="pkg_multi_f" type="checkbox" {{"checked" if entry['pkg_multi_f'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+			</tr>
+			<tr>
+				<td>Qualitative Models</td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_quali_r" value="pkg_quali_r" type="checkbox" {{"checked" if entry['pkg_quali_r'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_quali_w" value="pkg_quali_w" type="checkbox" {{"checked" if entry['pkg_quali_w'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_quali_f" value="pkg_quali_f" type="checkbox" {{"checked" if entry['pkg_quali_f'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+			</tr>
+			<tr>
+				<td>Render</td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_render_r" value="pkg_render_r" type="checkbox" {{"checked" if entry['pkg_render_r'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_render_w" value="pkg_render_w" type="checkbox" {{"checked" if entry['pkg_render_w'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_render_f" value="pkg_render_f" type="checkbox" {{"checked" if entry['pkg_render_f'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+			</tr>
+			<tr>
+				<td>Spacial Processes</td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_spacial_r" value="pkg_spacial_r" type="checkbox" {{"checked" if entry['pkg_spacial_r'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_spacial_w" value="pkg_spacial_w" type="checkbox" {{"checked" if entry['pkg_spacial_w'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td class="box"><label class="container">
+					<input name="sbml_pkg" id="pkg_spacial_f" value="pkg_spacial_f" type="checkbox" {{"checked" if entry['pkg_spacial_f'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+			</tr>
+		</table>
+
+		<label for="uses">What kind of facilities does the software provide?</label>
+		<h5>Please check all that apply.</h5>
+		<table class="simple">
+			<tr>
+				<td><label class="container">
+					<input name="uses" id="uses_model" value="uses_model" type="checkbox" {{"checked" if entry['uses_model'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td>Model creation/editing</td>
+			</tr>
+			<tr>
+				<td><label class="container">
+					<input name="uses" id="uses_numsim" value="uses_numsim" type="checkbox" {{"checked" if entry['uses_numsim'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td>Numerical simulation</td>
+			</tr>
+			<tr>
+				<td><label class="container">
+					<input name="uses" id="uses_analysis" value="uses_analysis" type="checkbox" {{"checked" if entry['uses_analysis'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td>Analysis (in addition to, or instead of, simulation)</td>
+			</tr>
+			<tr>
+				<td><label class="container">
+					<input name="uses" id="uses_visual" value="uses_visual" type="checkbox" {{"checked" if entry['uses_visual'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td>Visualization</td>
+			</tr>
+			<tr>
+				<td><label class="container">
+					<input name="uses" id="uses_integrate" value="uses_integrate" type="checkbox" {{"checked" if entry['uses_integrate'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td>Data or model integration (combining data from different sources)</td>
+			</tr>
+			<tr>
+				<td><label class="container">
+					<input name="uses" id="uses_manage" value="uses_manage" type="checkbox" {{"checked" if entry['uses_manage'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td>Data or model management (providing storage)</td>
+			</tr>
+			<tr>
+				<td><label class="container">
+					<input name="uses" id="uses_convert" value="uses_convert" type="checkbox" {{"checked" if entry['uses_convert'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td>Data or model conversion (SBML to/from other formats)</td>
+			</tr>
+			<tr>
+				<td><label class="container">
+					<input name="uses" id="uses_prog" value="uses_prog" type="checkbox" {{"checked" if entry['uses_prog'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td>Programming API</td>
+			</tr>
+			<tr>
+				<td><label class="container">
+					<input name="uses" id="uses_net" value="uses_net" type="checkbox" {{"checked" if entry['uses_net'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td>Network API</td>
+			</tr>
+			<tr>
+				<td><label class="container">
+					<input name="uses" id="uses_other" value="uses_other" type="checkbox" {{"checked" if entry['uses_other'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td>Other:<input id="uses_other_txt" name="uses_other_txt" value="{{entry['uses_other_txt'] if entry['uses_other'] else ""}}"</td>
+			</tr>
+		</table>
+
+		<label for="lib">Does the software use an external SBML parser library?</label>
+		<h5>Check all that apply. We list the most common libraries, but please use the "Other" field if you use something other than libSBML or JSBML. If your software depends on some other software and you do not know what that software uses, please check the option "I don't know" below.</h5>
+		<table class="simple">
+			<tr>
+				<td><label class="container">
+					<input name="lib" id="lib_sbml" value="lib_sbml" type="checkbox" {{"checked" if entry['lib_sbml'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td>libSBML</td>
+			</tr>
+			<tr>
+				<td><label class="container">
+					<input name="lib" id="lib_jsbml" value="lib_jsbml" type="checkbox" {{"checked" if entry['lib_jsbml'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td>JSBML</td>
+			</tr>
+			<tr>
+				<td><label class="container">
+					<input name="lib" id="lib_custom" value="lib_custom" type="checkbox" {{"checked" if entry['lib_custom'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td>Homegrown/custom parser</td>
+			</tr>
+			<tr>
+				<td><label class="container">
+					<input name="lib" id="lib_idk" value="lib_idk" type="checkbox" {{"checked" if entry['lib_idk'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td>I don't know</td>
+			</tr>
+			<tr>
+				<td><label class="container">
+					<input name="lib" id="lib_other" value="lib_other" type="checkbox" {{"checked" if entry['lib_other'] else ""}}>
+					<span class="checkmark"></span>
+				</label></td>
+				<td>Other:<input id="lib_other_txt" name="lib_other_txt" value="{{entry['lib_other_txt'] if entry['lib_other'] else ""}}"</td>
+			</tr>
+		</table>
+
 		<input type="submit" value="Save">
 
 	</form>
