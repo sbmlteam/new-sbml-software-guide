@@ -3,10 +3,11 @@ from flask import (
 )
 from werkzeug.exceptions import abort
 
-from flaskr.auth import login_required
-from flaskr.db import get_db
-from entrydata import *
-from search import *
+import sbmlguide
+from sbmlguide.auth import *
+from sbmlguide.db import *
+from sbmlguide.entrydata import *
+from sbmlguide.search import *
 
 import json
 
