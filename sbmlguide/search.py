@@ -8,6 +8,15 @@ class Search:
 		self.os_list = temp_vars.get("os_list", "").split(", ")
 		print ("init", self.os_list)
 
+		self.lvl = temp_vars.get("lvl", "").split(", ")
+
+		self.pkg = temp_vars.get("pkg", "").split(", ")
+
+		self.uses_other = int(temp_vars.get("uses_other", 0))
+		self.uses = temp_vars.get("uses", "").split(", ")
+
+		self.lib = temp_vars.get("lib", "False") != "False"
+
 		self.academic = int(temp_vars.get("academic", 0))
 		self.nonprofit = int(temp_vars.get("nonprofit", 0))
 		self.govt = int(temp_vars.get("govt", 0))
@@ -16,8 +25,6 @@ class Search:
 		self.dependency = int(temp_vars.get("dependency", 0))
 		self.no_dependency = int(temp_vars.get("no_dependency", 0))
 		self.dependency_list = temp_vars.get("dependency_list", "").split(", ")
-		print (self.dependency_list)
-		print (", ".join(self.dependency_list))
 
 	# works off a URL string to create a search object
 	def __init__(self, input_str):
@@ -40,8 +47,17 @@ class Search:
 		if "Other" in self.os_list:
 			self.os_other = 1
 			self.os_list.insert(0, form['os_other_txt'])
+			self.os_list.remove("Other")
 		else:
 			self.os_other = 0
+
+		self.uses = form.getlist('uses')
+		if "Other" in self.uses:
+			self.uses_other = 1
+			self.uses.insert(0, form['uses_other_txt'])
+			self.uses.remove("Other")
+		else:
+			self.uses_other = 0
 
 		# get fees
 		fees = form.getlist('fee')
@@ -62,6 +78,12 @@ class Search:
 			self.dependency = 0
 			self.no_dependency = 0
 
+		self.lvl = form.getlist('sbml_lvl')
+
+		self.pkg = form.getlist('sbml_pkg')
+
+		self.lib = str(bool(form.getlist('lib')))
+
 		print (self.__str__())
 	
 	# converts the object to a URL-safe string
@@ -69,7 +91,6 @@ class Search:
 		url = [str(attr) + "-" + (
 					", ".join(self[str(attr)]) 
 					if (type(self[str(attr)]) == type([])) 
-					# if (attr == 'dependency_list')
 					else str(self[str(attr)]))
 				for attr in dir(self) if not callable(getattr(self, attr)) and not attr.startswith("__")]
 		return ";".join(url)
@@ -88,12 +109,23 @@ class Search:
 		# else: display_str += "Any dependencies" + s
 		
 		if len(self.os_list[0]) > 0: 
-			os_list_list = self.os_list
-			# remove 'Other' from the end of the list if it's there
-			if "Other" in os_list_list:
-				os_list_list.remove("Other")
+			display_str += ("Required OS support: " + s + "\t" +
+				(s + "\t").join(self.os_list) + s)
 
-			display_str += "Required OS support: " + ", ".join(os_list_list) + s
+		if len(self.lvl[0]) > 0:
+			display_str += ("Required SBML support: " + s + "\t" +
+				(s + "\t").join(self.lvl) + s)
+
+		if len(self.pkg[0]) > 0:
+			display_str += ("Required packages: " + s + "\t" +
+				(s + "\t").join(self.pkg) + s)
+
+		if len(self.uses[0]) > 0:
+			display_str += ("Required facilities: " + s + "\t" +
+				(s + "\t").join(self.uses) + s)
+
+		if self.lib:
+			display_str += "Mainstream parser" + s
 
 		# remove the separator from the last item
 		display_str = display_str[0:len(display_str)-len(s)]

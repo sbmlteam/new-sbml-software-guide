@@ -105,7 +105,7 @@
 	</table>
 
 	<label for="dependency">Required Dependencies</label>
-	<h5>Separate acceptable dependencies using commas (eg: MATLAB)</h5>
+	<h5>Separate acceptable dependencies using commas (eg: MATLAB, Python)</h5>
 	<table class="simple">
 		<tr>
 			<td><label class="container">
@@ -127,6 +127,359 @@
 				<span class="checkmark button"></span>
 			</label></td>
 			<td>Acceptable Dependencies:<input name="dependency_list" id="dependency_list" value="{{", ".join(search['dependency_list']) if search['dependency'] else ""}}" ></td>
+		</tr>
+	</table>
+
+	<label for="lvl">Required SBML Level Support</label>
+	<table class="complex">
+		<tr class="head">
+			<th></th>
+			<th>Import</th>
+			<th>Export</th>
+		</tr>
+		<tr>
+			<td>Level 1 Version 1</td>
+			<td class="box"><label class="container">
+				<input name="sbml_lvl" id="lvl_1_1_i" value="Level 1 Version 1 import" type="checkbox" {{"checked" if "Level 1 Version 1 import" in search['lvl'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_lvl" id="lvl_1_1_e" value="Level 1 Version 1 export" type="checkbox" {{"checked" if "Level 1 Version 1 export" in search['lvl'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+		</tr>
+		<tr>
+			<td>Level 1 Version 2</td>
+			<td class="box"><label class="container">
+				<input name="sbml_lvl" id="lvl_1_2_i" value="Level 1 Version 2 import" type="checkbox" {{"checked" if "Level 1 Version 2 import" in search['lvl'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_lvl" id="lvl_1_2_e" value="Level 1 Version 2 export" type="checkbox" {{"checked" if "Level 1 Version 2 export" in search['lvl'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+		</tr>
+		<tr>
+			<td>Level 2 Version 1</td>
+			<td class="box"><label class="container">
+				<input name="sbml_lvl" id="lvl_2_1_i" value="Level 2 Version 1 import" type="checkbox" {{"checked" if "Level 2 Version 1 import" in search['lvl'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_lvl" id="lvl_2_1_e" value="Level 2 Version 1 export" type="checkbox" {{"checked" if "Level 2 Version 1 export" in search['lvl'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+		</tr>
+		<tr>
+			<td>Level 2 Version 2</td>
+			<td class="box"><label class="container">
+				<input name="sbml_lvl" id="lvl_2_2_i" value="Level 2 Version 2 import" type="checkbox" {{"checked" if "Level 2 Version 2 import" in search['lvl'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_lvl" id="lvl_2_2_e" value="Level 2 Version 2 export" type="checkbox" {{"checked" if "Level 2 Version 2 export" in search['lvl'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+		</tr>
+		<tr>
+			<td>Level 2 Version 3</td>
+			<td class="box"><label class="container">
+				<input name="sbml_lvl" id="lvl_2_3_i" value="Level 2 Version 3 import" type="checkbox" {{"checked" if "Level 2 Version 3 import" in search['lvl'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_lvl" id="lvl_2_3_e" value="Level 2 Version 3 export" type="checkbox" {{"checked" if "Level 2 Version 3 export" in search['lvl'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+		</tr>
+		<tr>
+			<td>Level 2 Version 4</td>
+			<td class="box"><label class="container">
+				<input name="sbml_lvl" id="lvl_2_4_i" value="Level 2 Version 4 import" type="checkbox" {{"checked" if "Level 2 Version 4 import" in search['lvl'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_lvl" id="lvl_2_4_e" value="Level 2 Version 4 export" type="checkbox" {{"checked" if "Level 2 Version 4 export" in search['lvl'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+		</tr>
+		<tr>
+			<td>Level 2 Version 5</td>
+			<td class="box"><label class="container">
+				<input name="sbml_lvl" id="lvl_2_5_i" value="Level 2 Version 5 import" type="checkbox" {{"checked" if "Level 2 Version 5 import" in search['lvl'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_lvl" id="lvl_2_5_e" value="Level 2 Version 5 export" type="checkbox" {{"checked" if "Level 2 Version 5 export" in search['lvl'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+		</tr>
+		<tr>
+			<td>Level 3 Version 1</td>
+			<td class="box"><label class="container">
+				<input name="sbml_lvl" id="lvl_3_1_i" value="Level 3 Version 1 import" type="checkbox" {{"checked" if "Level 3 Version 1 import" in search['lvl'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_lvl" id="lvl_3_1_e" value="Level 3 Version 1 export" type="checkbox" {{"checked" if "Level 3 Version 1 export" in search['lvl'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+		</tr>
+		<tr>
+			<td>Level 3 Version 2</td>
+			<td class="box"><label class="container">
+				<input name="sbml_lvl" id="lvl_3_2_i" value="Level 3 Version 2 import" type="checkbox" {{"checked" if "Level 3 Version 2 import" in search['lvl'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_lvl" id="lvl_3_2_e" value="Level 3 Version 2 export" type="checkbox" {{"checked" if "Level 3 Version 2 export" in search['lvl'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+		</tr>
+	</table>
+
+	<label for="sbml_pkg">Required SBML Level 3 Package Support</label>
+	<table class="complex">
+		<tr class="head">
+			<th></th>
+			<th>Read</th>
+			<th>Write</th>
+			<th>Future support planned</th>
+		</tr>
+		<tr>
+			<td>Arrays</td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_array_r" value="Arrays: Read" type="checkbox" {{"checked" if "Arrays: Read" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_array_w" value="Arrays: Write" type="checkbox" {{"checked" if "Arrays: Write" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_array_f" value="Arrays: Future Support Planned" type="checkbox" {{"checked" if "Arrays: Future Support Planned" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+		</tr>
+		<tr>
+			<td>Distributions</td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_distr_r" value="Distributions: Read" type="checkbox" {{"checked" if "Distributions: Read" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_distr_w" value="Distributions: Write" type="checkbox" {{"checked" if "Distributions: Write" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_distr_f" value="Distributions: Future Support Planned" type="checkbox" {{"checked" if "Distributions: Future Support Planned" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+		</tr>
+		<tr>
+			<td>Flux Balance Constraints</td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_flux_r" value="Flux Balance Constraints: Read" type="checkbox" {{"checked" if "Flux Balance Constraints: Read" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_flux_w" value="Flux Balance Constraints: Write" type="checkbox" {{"checked" if "Flux Balance Constraints: Write" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_flux_f" value="Flux Balance Constraints: Future Support Planned" type="checkbox" {{"checked" if "Flux Balance Constraints: Future Support Planned" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+		</tr>
+		<tr>
+			<td>Groups</td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_groups_r" value="Groups: Read" type="checkbox" {{"checked" if "Groups: Read" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_groups_w" value="Groups: Write" type="checkbox" {{"checked" if "Groups: Write" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_groups_f" value="Groups: Future Support Planned" type="checkbox" {{"checked" if "Groups: Future Support Planned" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+		</tr>
+		<tr>
+			<td>Hierarchical Model Composition</td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_heir_r" value="Heirarchical Model Composition: Read" type="checkbox" {{"checked" if "Heirarchical Model Composition: Read" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_heir_w" value="Heirarchical Model Composition: Write" type="checkbox" {{"checked" if "Heirarchical Model Composition: Write" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_heir_f" value="Heirarchical Model Composition: Future Support Planned" type="checkbox" {{"checked" if "Heirarchical Model Composition: Future Support Planned" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+		</tr>
+		<tr>
+			<td>Layout</td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_layout_r" value="Layout: Read" type="checkbox" {{"checked" if "Layout: Read" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_layout_w" value="Layout: Write" type="checkbox" {{"checked" if "Layout: Write" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_layout_f" value="Layout: Future Support Planned" type="checkbox" {{"checked" if "Layout: Future Support Planned" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+		</tr>
+		<tr>
+			<td>Multistate, multicompartment & multicomponent species</td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_multi_r" value="Multistate, Multicompartment, and Multicomponent Species: Read" type="checkbox" {{"checked" if "Multistate, Multicompartment, and Multicomponent Species: Read" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_multi_w" value="Multistate, Multicompartment, and Multicomponent Species: Write" type="checkbox" {{"checked" if "Multistate, Multicompartment, and Multicomponent Species: Write" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_multi_f" value="Multistate, Multicompartment, and Multicomponent Species: Future Support Planned" type="checkbox" {{"checked" if "Multistate, Multicompartment, and Multicomponent Species: Future Support Planned" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+		</tr>
+		<tr>
+			<td>Qualitative Models</td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_quali_r" value="Qualitative Models: Read" type="checkbox" {{"checked" if "Qualitative Models: Read" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_quali_w" value="Qualitative Models: Write" type="checkbox" {{"checked" if "Qualitative Models: Write" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_quali_f" value="Qualitative Models: Future Support Planned" type="checkbox" {{"checked" if "Qualitative Models: Future Support Planned" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+		</tr>
+		<tr>
+			<td>Render</td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_render_r" value="Render: Read" type="checkbox" {{"checked" if "Render: Read" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_render_w" value="Render: Write" type="checkbox" {{"checked" if "Render: Write" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_render_f" value="Render: Future Support Planned" type="checkbox" {{"checked" if "Render: Future Support Planned" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+		</tr>
+		<tr>
+			<td>Spacial Processes</td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_spacial_r" value="Spacial Processes: Read" type="checkbox" {{"checked" if "Spacial Processes: Read" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_spacial_w" value="Spacial Processes: Write" type="checkbox" {{"checked" if "Spacial Processes: Write" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td class="box"><label class="container">
+				<input name="sbml_pkg" id="pkg_spacial_f" value="Spacial Processes: Future Support Planned" type="checkbox" {{"checked" if "Spacial Processes: Future Support Planned" in search['pkg'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+		</tr>
+	</table>
+
+	<label for="uses">Required Facilities</label>
+	<table class="simple">
+		<tr>
+			<td><label class="container">
+				<input name="uses" id="uses_model" value="Model creation/editing" type="checkbox" {{"checked" if "Model creation/editing" in search['uses'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td>Model creation/editing</td>
+		</tr>
+		<tr>
+			<td><label class="container">
+				<input name="uses" id="uses_numsim" value="Numerical simulation" type="checkbox" {{"checked" if "Numerical simulation" in search['uses'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td>Numerical simulation</td>
+		</tr>
+		<tr>
+			<td><label class="container">
+				<input name="uses" id="uses_analysis" value="Analysis" type="checkbox" {{"checked" if "Analysis" in search['uses'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td>Analysis (in addition to, or instead of, simulation)</td>
+		</tr>
+		<tr>
+			<td><label class="container">
+				<input name="uses" id="uses_visual" value="Visualization" type="checkbox" {{"checked" if "Visualization" in search['uses'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td>Visualization</td>
+		</tr>
+		<tr>
+			<td><label class="container">
+				<input name="uses" id="uses_integrate" value="Integration" type="checkbox" {{"checked" if "Integration" in search['uses'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td>Data or model integration (combining data from different sources)</td>
+		</tr>
+		<tr>
+			<td><label class="container">
+				<input name="uses" id="uses_manage" value="Management" type="checkbox" {{"checked" if "Management" in search['uses'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td>Data or model management (providing storage)</td>
+		</tr>
+		<tr>
+			<td><label class="container">
+				<input name="uses" id="uses_convert" value="Conversion" type="checkbox" {{"checked" if "Conversion" in search['uses'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td>Data or model conversion (SBML to/from other formats)</td>
+		</tr>
+		<tr>
+			<td><label class="container">
+				<input name="uses" id="uses_prog" value="Programming API" type="checkbox" {{"checked" if "Programming API" in search['uses'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td>Programming API</td>
+		</tr>
+		<tr>
+			<td><label class="container">
+				<input name="uses" id="uses_net" value="Network API" type="checkbox" {{"checked" if "Network API" in search['uses'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td>Network API</td>
+		</tr>
+		<tr>
+			<td><label class="container">
+				<input name="uses" id="uses_other" value="Other" type="checkbox" {{"checked" if search['uses_other'] else ""}}>
+				<span class="checkmark"></span>
+			</label></td>
+			<td>Other:<input id="uses_other_txt" name="uses_other_txt" value="{{search['uses'][0] if search['uses_other'] else ""}}"</td>
+		</tr>
+	</table>
+
+	<label for="lib">Other Options</label>
+	<table class="simple">
+		<tr>
+			<td><label class="container">
+				<input name="lib" id="lib" value="1" type="checkbox" {{"checked" if search['lib'] else "" }} >
+				<span class="checkmark"></span>
+			</label></td>
+			<td>Require Mainstream SBML Parser (ie: JSBML or libSBML)</td>
 		</tr>
 	</table>
 
