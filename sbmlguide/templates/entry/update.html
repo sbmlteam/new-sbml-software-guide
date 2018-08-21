@@ -211,31 +211,31 @@
 		<table class="simple">
 			<tr>
 				<td><label class="container">
-					<input name="src" id="src_closed" value="0" type="radio" {{"checked" if entry['src'] == "0" else ""}} >
+					<input name="src" id="src_closed" value="Closed/proprietary" type="radio" {{"checked" if entry['src'] == "Closed/proprietary" else ""}} >
 					<span class="checkmark button"></span>
 				</label></td>
 				<td>Source code is closed/proprietary</td>
 			</tr>
 			<tr>
 				<td><label class="container">
-					<input name="src" id="src_partial" value="1" type="radio" {{"checked" if entry['src'] == "1" else ""}} >
+					<input name="src" id="src_partial" value="Partially available" type="radio" {{"checked" if entry['src'] == "Partially available" else ""}} >
 					<span class="checkmark button"></span>
 				</label></td>
 				<td>Source code is partially available, or is available under restricted terms</td>
 			</tr>
 			<tr>
 				<td><label class="container">
-					<input name="src" id="src_open" value="2" type="radio" {{"checked" if entry['src'] == "2" else ""}} >
+					<input name="src" id="src_open" value="Open under an OSI license" type="radio" {{"checked" if entry['src'] == "Open under an OSI license" else ""}} >
 					<span class="checkmark button"></span>
 				</label></td>
 				<td>Source code is open under an OSI-approved open-source license</td>
 			</tr>
 			<tr>
 				<td><label class="container">
-					<input name="src" id="src_other" value="3" type="radio" {{"checked" if entry['src'] == "3" else ""}} >
+					<input name="src" id="src_other" value="Other" type="radio" {{"checked" if entry['src_other'] else ""}} >
 					<span class="checkmark button"></span>
 				</label></td>
-				<td>Other:<input name="src_other_txt" id="src_other_txt" value="{{entry['src_other_txt'] if entry['src'] == "3" else ""}}"></td>
+				<td>Other:<input name="src_other_txt" id="src_other_txt" value="{{entry['src'] if entry['src_other'] else ""}}"></td>
 			</tr>
 		</table>
 

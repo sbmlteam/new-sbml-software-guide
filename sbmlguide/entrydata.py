@@ -57,7 +57,11 @@ class Entry:
 
 		# open source checks
 		self.src = form['src']
-		self.src_other_txt = form['src_other_txt'] if self.src == "3" else ""
+		if self.src == "Other":
+			self.src_other = 1
+			self.src = form['src_other_txt']
+		else:
+			self.src_other = 0
 
 		# sbml level
 		self.sbml_lvl = json.dumps(form.getlist('sbml_lvl'))

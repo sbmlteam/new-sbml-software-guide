@@ -24,20 +24,20 @@ CREATE VIRTUAL TABLE post USING fts4 (
 	tags TEXT NOT NULL,
 
 	src TEXT NOT NULL,
-	src_other_txt TEXT NOT NULL,
+	src_other INTEGER,
 
 	dependency TEXT NOT NULL,
 	dependency_other INTEGER,
 
 	uses TEXT NOT NULL,
-	uses_other TEXT NOT NULL,
+	uses_other INTEGER,
 
 	sbml_pkg TEXT NOT NULL,
 
 	sbml_lvl TEXT NOT NULL,
 
 	lib TEXT NOT NULL,
-	lib_other TEXT NOT NULL,
+	lib_other INTEGER,
 
 	-- os list
 	os TEXT NOT NULL,
