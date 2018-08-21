@@ -114,9 +114,15 @@ def view(id):
 	entry = get_post(id, False)
 
 	os_list=json.loads(entry['os'])
-	if "Other" in os_list: os_list.remove("Other")
+	lib_list = json.loads(entry['lib'])
+	uses_list = json.loads(entry['uses'])
+	lvl_list = json.loads(entry['sbml_lvl'])
+	pkg_list = json.loads(entry['sbml_pkg'])
 
-	return render_template('entry/view.html', os_list=os_list, entry=entry, search=get_search(request))
+	return render_template('entry/view.html', 
+			os_list=os_list, lib_list=lib_list, uses_list=uses_list,
+			lvl_list=lvl_list, pkg_list=pkg_list,
+			entry=entry, search=get_search(request))
 	
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
@@ -136,8 +142,16 @@ def update(id):
 	select_contact = post['contact_me']
 	select_dependency = 0 if post['dependency'] == "None" else (1 if not post['dependency_other'] else 2)
 	
-	return render_template('entry/update.html', select_contact=select_contact, 
-			select_dependency=select_dependency, os_list=json.loads(post['os']), 
+	os_list = json.loads(post['os'])
+	lib_list = json.loads(post['lib'])
+	uses_list = json.loads(post['uses'])
+	lvl_list = json.loads(post['sbml_lvl'])
+	pkg_list = json.loads(post['sbml_pkg'])
+
+	return render_template('entry/update.html',
+			select_contact=select_contact, select_dependency=select_dependency,
+			os_list=os_list, lib_list=lib_list, uses_list=uses_list,
+			lvl_list=lvl_list, pkg_list=pkg_list,
 			entry=post, edit=True, search=get_search(request))
 	
 @bp.route('/<int:id>/delete', methods=('POST',))
