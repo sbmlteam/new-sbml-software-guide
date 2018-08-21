@@ -119,6 +119,14 @@ class Entry:
 		elif (self.fee_academic == -1 or self.fee_nonprofit == -1 or
 			self.fee_govt == -1 or self.fee_commercial == -1):
 			error = 'Please finish your fees section!'
+		elif self.sbml_lvl == json.dumps([]):
+			error = 'Please select the SBML levels your software supports!'
+		elif not self.src:
+			error = 'Please provide information about your source code!'
+		elif self.lib == json.dumps([]):
+			error = 'Please select the SBML library your software uses!'
+		elif self.uses == json.dumps([]):
+			error = 'Please provide more details about your software\'s facilities!'
 		
 		return error
 
