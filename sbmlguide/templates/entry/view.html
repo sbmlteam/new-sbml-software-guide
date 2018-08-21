@@ -23,12 +23,16 @@
 	<label>More Information</label>
 	<table class="complex">
 		<tr>
+			<td>Facilities</td>
+			<td>{{ ", ".join(uses_list) }}</td>
+		</tr>
+		<tr>
 			<td>Supported OS's</td>
 			<td>{{ ", ".join(os_list) }}</td>
 		</tr>
 		<tr>
-			<td>Dependencies</td>
-			<td>{{ entry['dependency'] }}</td>
+			<td>SBML Levels Supported</td>
+			<td class="wrap" >{{ "\r\n".join(lvl_list) }}</td>
 		</tr>
 		<tr>
 			<td>Costs</td>
@@ -40,8 +44,20 @@
 			</td>
 		</tr>
 		<tr>
+			<td>SBML Level 3 Packages Supported</td>
+			<td class="wrap">{{ "\r\n".join(pkg_list) }}</td>
+		</tr>
+		<tr>
+			<td>Dependencies</td>
+			<td>{{ entry['dependency'] }}</td>
+		</tr>
+		<tr>
 			<td>Source Code</td>
 			<td>{{ entry['src'] }}</td>
+		</tr>
+		<tr>
+			<td>Library Used</td>
+			<td>{{ ", ".join(lib_list) }}</td>
 		</tr>
 
 		<tr>

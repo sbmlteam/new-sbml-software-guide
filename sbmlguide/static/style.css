@@ -44,6 +44,10 @@ table {
 	padding-top: 0.15em;
 }
 
+.wrap {
+	white-space: pre-wrap;
+}
+
 /*
 th, td {
 	border-bottom: 1px solid #2a5f82;
