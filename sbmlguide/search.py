@@ -11,6 +11,13 @@ class Search:
 		self.lvl = temp_vars.get("lvl", "").split(", ")
 
 		self.pkg = temp_vars.get("pkg", "").split(", ")
+		# if future support is okay for the package, then any value
+		# (read, write, or future support planned) is okay in the search
+		# so we just chop off the future support planned line
+		self.pkg = [(pkg[0:len(pkg)-len(": Future Support Planned")]
+			if "Future Support Planned" in pkg
+			else pkg)
+			for pkg in self.pkg]
 
 		self.uses_other = int(temp_vars.get("uses_other", 0))
 		self.uses = temp_vars.get("uses", "").split(", ")
@@ -44,7 +51,7 @@ class Search:
 		# fetch operating systems
 		self.os_list = form.getlist('os')
 		print (self.os_list)
-		if "Other" in self.os_list:
+		if "Other" in self.os_list and form['os_other_txt']:
 			self.os_other = 1
 			self.os_list.insert(0, form['os_other_txt'])
 			self.os_list.remove("Other")
@@ -52,7 +59,7 @@ class Search:
 			self.os_other = 0
 
 		self.uses = form.getlist('uses')
-		if "Other" in self.uses:
+		if "Other" in self.uses and form['uses_other_txt']:
 			self.uses_other = 1
 			self.uses.insert(0, form['uses_other_txt'])
 			self.uses.remove("Other")
@@ -136,3 +143,65 @@ class Search:
 		# going from ['foo', 'bar'] to a real list:
 		# remove outer [], split by commas then remove '' from each item
 		return [item[1:len(item)-1] for item in string[1:len(string)-1].split(", ")]
+
+	# returns the SQL command represented by this search
+	def search_str(self):
+		# we make a list of select commands and then union them
+		base_cmd = (
+			"SELECT p.rowid, *" +
+			" FROM post p JOIN user u ON p.author_id = u.id"
+			)
+		cmd_list = []
+		cmd_list.append(base_cmd)
+
+		# dependency term
+		if self.no_dependency:
+			cmd_list.append(base_cmd + " WHERE dependency = \"\"")
+		elif self.dependency:
+			cmd_list.append(base_cmd + " WHERE p.dependency MATCH '" + " OR ".join(self.dependency_list) + " OR \"None\"'")
+
+		# keyword term
+		if len(self.keywords[0]) > 0:
+			cmd_list.append(base_cmd + " WHERE post MATCH '" +" ".join(self.keywords) + "'")
+
+		# os term
+		if len(self.os_list[0]) > 0:
+			os_list = self.os_list
+			# matches the appropriate os list
+			cmd_list.append(base_cmd + " WHERE os MATCH '" + " ".join(os_list) + "'")
+
+		# fees term (NOT a keywords search; DOESN'T use fts4 searching)
+		if (self.academic):
+			cmd_list.append(base_cmd + " WHERE fee_academic = 0")
+		if (self.nonprofit):
+			cmd_list.append(base_cmd + " WHERE fee_nonprofit = 0")
+		if (self.govt):
+			cmd_list.append(base_cmd + " WHERE fee_govt = 0")
+		if (self.commercial):
+			cmd_list.append(base_cmd + " WHERE fee_commercial = 0")
+
+		# sbml level term
+		if len(self.lvl[0]) > 0:
+			cmd_list.append(base_cmd + " WHERE sbml_lvl MATCH '\"" + "\" \"".join(self.lvl) + "\"'")
+
+		# sbml lvl3 packages term
+		if len(self.pkg[0]) > 0:
+			cmd_list.append(base_cmd + " WHERE sbml_pkg MATCH '\"" + "\" \"".join(self.pkg) + "\"'")
+
+		# required uses term
+		if len(self.uses[0]) > 0:
+			cmd_list.append(base_cmd + " WHERE uses MATCH '\"" + "\" \"".join(self.uses) + "\"'")
+
+		if self.lib:
+			cmd_list.append(base_cmd + " WHERE lib MATCH 'JSBML OR libSBML'")
+
+		# joins all the search terms and sorts them
+		if len(cmd_list) > 0:
+			cmd = " INTERSECT ".join(cmd_list) 
+		else:
+			cmd = base_cmd
+		
+		cmd += " ORDER BY created DESC"
+
+		print (cmd)
+		return cmd

@@ -25,51 +25,7 @@ def index():
 	db = get_db()
 	search=get_search(request)
 
-	# we make a list of select commands and then union them
-	base_cmd = (
-		"SELECT p.rowid, *" +
-		" FROM post p JOIN user u ON p.author_id = u.id"
-		)
-	cmd_list = []
-	cmd_list.append(base_cmd)
-
-	# dependency term
-	if search.no_dependency:
-		cmd_list.append(base_cmd + " WHERE dependency = \"\"")
-	elif search.dependency:
-		cmd_list.append(base_cmd + " WHERE p.dependency MATCH '" + " OR ".join(search.dependency_list) + " OR \"None\"'")
-
-	# keyword term
-	if len(search.keywords[0]) > 0:
-		cmd_list.append(base_cmd + " WHERE post MATCH '" +" AND ".join(search.keywords) + "'")
-
-	# os term
-	if len(search.os_list[0]) > 0:
-		os_list = search.os_list
-		# matches the appropriate os list
-		cmd_list.append(base_cmd + " WHERE os MATCH '" + " ".join(os_list) + "'")
-
-	# fees term (NOT a keywords search; DOESN'T use fts4 searching)
-	if (search.academic):
-		cmd_list.append(base_cmd + " WHERE fee_academic = 0")
-	if (search.nonprofit):
-		cmd_list.append(base_cmd + " WHERE fee_nonprofit = 0")
-	if (search.govt):
-		cmd_list.append(base_cmd + " WHERE fee_govt = 0")
-	if (search.commercial):
-		cmd_list.append(base_cmd + " WHERE fee_commercial = 0")
-
-	# joins all the search terms and sorts them
-	if len(cmd_list) > 0:
-		cmd = " INTERSECT ".join(cmd_list) 
-	else:
-		cmd = base_cmd
-	
-	cmd += " ORDER BY created DESC"
-
-	print (cmd)
-	
-	posts = db.execute(cmd).fetchall()
+	posts = db.execute(search.search_str()).fetchall()
 	return render_template('entry/index.html', entries=posts, search=search)
 	
 @bp.route('/create', methods=('GET', 'POST'))

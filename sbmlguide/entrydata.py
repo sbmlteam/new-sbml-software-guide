@@ -40,7 +40,7 @@ class Entry:
 
 		# fetch operating systems
 		self.os = form.getlist('os')
-		if "Other" in self.os:
+		if "Other" in self.os and form['os_other_txt']:
 			self.os_other = 1
 			self.os.insert(0, form['os_other_txt'])
 			self.os.remove("Other")
@@ -70,7 +70,7 @@ class Entry:
 		self.sbml_pkg = json.dumps(form.getlist("sbml_pkg"))
 
 		self.uses = form.getlist("uses")
-		if "Other" in self.uses:
+		if "Other" in self.uses and form['uses_other_txt']:
 			self.uses.remove("Other")
 			self.uses.insert(0, form['uses_other_txt'])
 			self.uses_other = 1
@@ -79,7 +79,7 @@ class Entry:
 		self.uses = json.dumps(self.uses)
 
 		self.lib = form.getlist("lib")
-		if "Other" in self.lib:
+		if "Other" in self.lib and form['lib_other_txt']:
 			self.lib.remove("Other")
 			self.lib.insert(0, form['lib_other_txt'])
 			self.lib_other = 1
