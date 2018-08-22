@@ -72,5 +72,41 @@
 			<td>Contact</td>
 			<td>{{ entry['contact'] }}</td>
 		</tr>
+
+		{% if entry['contact_info'] %}
+		<tr>
+			<td>Name/ORCiD of contact</td>
+			<td>{{ entry['contact_info'] }}</td>
+		</tr>
+		{% endif %}
+
+		{% if entry['doi'] %}
+		<tr>
+			<td>DOI of software release</td>
+			<td>{{ entry['doi'] }}</td>
+		</tr>
+		{% endif %}
+
+		{% if entry['citation'] %}
+		<tr>
+			<td>Preferred citation</td>
+			<td>{{ entry['citation'] }}</td>
+		</tr>
+		{% endif %}
+
+		{% if entry['api'] %}
+		<tr>
+			<td>API details</td>
+			<td>{{ entry['api'] }}</td>
+		</tr>
+		{% endif %}
+
+		{% if entry['extra'] %}
+		<tr>
+			<td>Additional information</td>
+			<td>{{ entry['extra'] }}</td>
+		</tr>
+		{% endif %}
+
 	</table>
 {% endblock %}
