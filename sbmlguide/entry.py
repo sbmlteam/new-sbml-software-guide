@@ -26,8 +26,12 @@ def index():
 	search=get_search(request)
 
 	posts = db.execute(search.search_str()).fetchall()
-	return render_template('entry/index.html', entries=posts, search=search)
-	
+
+	total = db.execute('SELECT COUNT(*) FROM post').fetchone()[0]
+
+	return render_template('entry/index.html',
+			entries=posts, search=search, current=len(posts), total=total)
+
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
 def create():

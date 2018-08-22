@@ -9,7 +9,7 @@
 
 {% block content %}
 	<p></p>
-	<div class="about"><strong>Search </strong><a href="{{ url_for('entry.search_clear') }}">(Clear)</a> <a href="{{ url_for('entry.search', search=search) }}">(Edit)</a><strong>:</strong><br />{{ search.pretty_str() }}</div>
+	<div class="about"><strong>Search </strong><a href="{{ url_for('entry.search_clear') }}">(Clear)</a> <a href="{{ url_for('entry.search', search=search) }}">(Edit)</a><strong>:</strong><br />{{ search.pretty_str() }}<br /><br />Showing {{ current }} {{"results" if current != 1 else "result"}} out of {{ total }} {{"entries" if total != 1 else "entry"}}</div>
 	<hr>
 	{% for entry in entries %}
 		<article class="post">
