@@ -87,6 +87,12 @@ class Entry:
 			self.lib_other = 0
 		self.lib = json.dumps(self.lib)
 
+		self.contact_info = form['contact_info']
+		self.doi = form['doi']
+		self.citation = form['citation']
+		self.api = form['api']
+		self.extra = form['extra']
+
 	def __getitem__(self, arg):
 		return getattr(self, arg)
 

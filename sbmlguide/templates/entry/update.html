@@ -624,6 +624,28 @@
 			</tr>
 		</table>
 
+		<label for="optional">Additional optional information</label>
+		<h5>The information in this section can help people credit your efforts and reuse your software. However, it's optional, and you can skip this section if you prefer.</h5>
+
+		<label for="contact_info">Name or ORCiD identifier of a contact person and their organization</label>
+		<h5>Although we ask for an email address above, email addresses sometimes stop working. Having a person's name (or ORCiD identifier) can help find an author in those situations. Please include an institution or company if possible, to help disambiguate people's names.</h5>
+		<input name="contact_info" id="contact_info" value="{{ entry['contact_info'] if entry['contact_info'] else "" }}">
+
+		<label for="doi">A DOI for the software release</label>
+		<h5>A DOI from Zenodo, DataCite, or another organization can allow readers to precisely identify the version of your software they are using.</h5>
+		<input name="doi" id="doi" value="{{ entry['doi'] if entry['doi'] else "" }}">
+
+		<label for="citation">How do you prefer the software to be cited?</label>
+		<h5>Here you can write one or more references. It can be in BibTeX format or any reasonably clear reference format.</h5>
+		<input name="citation" id="citation" value="{{ entry['citation'] if entry['citation'] else "" }}">
+
+		<label for="api">Does the software provide an API? If so, what languages and/or network protocols are supported?</label>
+		<input name="api" id="api" value="{{ entry['api'] if entry['api'] else "" }}">
+
+		<label for="extra">Is there any other information about your software that you would like to mention, but that has not been covered in the questions above?</label>
+		<h5>If there is something relevant that you would like to bring to people's attentions but that we didn't think to ask, please feel free to write about it here.</h5>
+		<input name="extra" id="extra" value="{{ entry['extra'] if entry['extra'] else "" }}">
+
 		<input type="submit" value="Save">
 
 	</form>
