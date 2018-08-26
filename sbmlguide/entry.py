@@ -29,7 +29,7 @@ def index():
 
 	total = db.execute('SELECT COUNT(*) FROM post').fetchone()[0]
 
-	return render_template('entry/index.html',
+	return render_template('entry/display/list.html',
 			entries=posts, search=search, current=len(posts), total=total)
 
 @bp.route('/create', methods=('GET', 'POST'))

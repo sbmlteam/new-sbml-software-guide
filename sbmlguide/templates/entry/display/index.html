@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block header %}
+	<h1>{% block title %}Entries{% endblock %}</h1>
+	{% if g.user %}
+		<a class="action" href="{{ url_for('entry.create', search=search) }}">New Entry</a>
+	{% endif %}
+{% endblock %}
+
+{% block content %}
+	<p></p>
+	<div class="about"><strong>Search </strong><a href="{{ url_for('entry.search_clear') }}">(Clear)</a> <a href="{{ url_for('entry.search', search=search) }}">(Edit)</a><strong>:</strong><br />{{ search.pretty_str() }}<br /><br />Showing {{ current }} {{"results" if current != 1 else "result"}} out of {{ total }} {{"entries" if total != 1 else "entry"}}</div>
+	<hr>
+	{% block display %}
+	{% endblock %}
+{% endblock %}
