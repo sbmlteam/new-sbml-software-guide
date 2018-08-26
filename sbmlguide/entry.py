@@ -20,16 +20,39 @@ def get_search(request):
 		return Search("-")
 	# return Search(request.args['search'])
 
+# TO CHANGE THE DEFAULT DISPLAY:
+# Change this 'entry.list' to 'entry.pivot' or 'entry.table'
 @bp.route('/')
 def index():
+	search=get_search(request)
+	return redirect(url_for('entry.list', search=search))
+
+@bp.route('/list')
+def list():
 	db = get_db()
 	search=get_search(request)
-
 	posts = db.execute(search.search_str()).fetchall()
-
 	total = db.execute('SELECT COUNT(*) FROM post').fetchone()[0]
 
 	return render_template('entry/display/list.html',
+			entries=posts, search=search, current=len(posts), total=total)
+
+@bp.route('/pivot')
+def pivot():
+	db = get_db()
+	search=get_search(request)
+	posts = db.execute(search.search_str()).fetchall()
+	total = db.execute('SELECT COUNT(*) FROM post').fetchone()[0]
+	return render_template('entry/display/pivot.html',
+			entries=posts, search=search, current=len(posts), total=total)
+
+@bp.route('/table')
+def table():
+	db = get_db()
+	search=get_search(request)
+	posts = db.execute(search.search_str()).fetchall()
+	total = db.execute('SELECT COUNT(*) FROM post').fetchone()[0]
+	return render_template('entry/display/table.html',
 			entries=posts, search=search, current=len(posts), total=total)
 
 @bp.route('/create', methods=('GET', 'POST'))
